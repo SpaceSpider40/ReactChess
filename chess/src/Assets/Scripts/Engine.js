@@ -7,7 +7,8 @@ class Engine extends React.Component{
         super(props);  
 
         this.state = {
-            page: this.page = <Menu startGame = {this.startGame}/>
+            player1: this.player1 = "player1",
+            player2: this.player2 = "player2"
         }
     }
 
@@ -16,15 +17,13 @@ class Engine extends React.Component{
     }
     
 
-    startGame(){
-        this.setState({
-            page: this.page = <Game />
-        })
+    startGame(p1,p2){
+        console.log(p1,p2);
     }
 
     render(){
         return(
-            <div>{this.page}</div>
+            <Menu startGame={this.startGame}/>
         )
     }
 }
