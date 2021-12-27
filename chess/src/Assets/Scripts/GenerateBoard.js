@@ -6,85 +6,85 @@ class GenerateBoard extends React.Component{
     }
  board(){
         const board =<div id="board"><grid>
-            <item id="8a"></item>
-            <item id="8b"></item>
-            <item id="8c"></item>
-            <item id="8d"></item>
-            <item id="8e"></item>
-            <item id="8f"></item>
-            <item id="8g"></item>
-            <item id="8h"></item>
+            <item id="8a" class="white"></item>
+            <item id="8b" class="black"></item>
+            <item id="8c" class="white"></item>
+            <item id="8d" class="black"></item>
+            <item id="8e" class="white"></item>
+            <item id="8f" class="black"></item>
+            <item id="8g" class="white"></item>
+            <item id="8h" class="black"></item>
         </grid>
         <grid>
-            <item id="7a"></item>
-            <item id="7b"></item>
-            <item id="7c"></item>
-            <item id="7d"></item>
-            <item id="7e"></item>
-            <item id="7f"></item>
-            <item id="7g"></item>
-            <item id="7h"></item>
+            <item id="7a" class="white"></item>
+            <item id="7b" class="black"></item>
+            <item id="7c" class="white"></item>
+            <item id="7d" class="black"></item>
+            <item id="7e" class="white"></item>
+            <item id="7f" class="black"></item>
+            <item id="7g" class="white"></item>
+            <item id="7h" class="black"></item>
         </grid>
 
         <grid>
-            <item id="6a"></item>
-            <item id="6b"></item>
-            <item id="6c"></item>
-            <item id="6d"></item>
-            <item id="6e"></item>
-            <item id="6f"></item>
-            <item id="6g"></item>
-            <item id="6h"></item>
+            <item id="6a"class="white"></item>
+            <item id="6b" class="black"></item>
+            <item id="6c" class="white"></item>
+            <item id="6d" class="black"></item>
+            <item id="6e" class="white"></item>
+            <item id="6f" class="black"></item>
+            <item id="6g" class="white"></item>
+            <item id="6h" class="black"></item>
         </grid>
         <grid>
-            <item id="5a"></item>
-            <item id="5b"></item>
-            <item id="5c"></item>
-            <item id="5d"></item>
-            <item id="5e"></item>
-            <item id="5f"></item>
-            <item id="5g"></item>
-            <item id="5h"></item>
+            <item id="5a" class="white"></item>
+            <item id="5b" class="black"></item>
+            <item id="5c" class="white"></item>
+            <item id="5d" class="black"></item>
+            <item id="5e" class="white"></item>
+            <item id="5f" class="black"></item>
+            <item id="5g" class="white"></item>
+            <item id="5h" class="black"></item>
         </grid>
         <grid>
-            <item id="4a"></item>
-            <item id="4b"></item>
-            <item id="4c"></item>
-            <item id="4d"></item>
-            <item id="4e"></item>
-            <item id="4f"></item>
-            <item id="4g"></item>
-            <item id="4h"></item>
+            <item id="4a" class="white"></item>
+            <item id="4b" class="black"></item>
+            <item id="4c" class="white"></item>
+            <item id="4d" class="black"></item>
+            <item id="4e" class="white"></item>
+            <item id="4f" class="black"></item>
+            <item id="4g" class="white"></item>
+            <item id="4h" class="black"></item>
         </grid>
         <grid>
-            <item id="3a"></item>
-            <item id="3b"></item>
-            <item id="3c"></item>
-            <item id="3d"></item>
-            <item id="3e"></item>
-            <item id="3f"></item>
-            <item id="3g"></item>
-            <item id="3h"></item>
+            <item id="3a" class="white"></item>
+            <item id="3b" class="black"></item>
+            <item id="3c" class="white"></item>
+            <item id="3d" class="black"></item>
+            <item id="3e" class="white"></item>
+            <item id="3f" class="black"></item>
+            <item id="3g" class="white"></item>
+            <item id="3h" class="black"></item>
         </grid>
         <grid>
-            <item id="2a"></item>
-            <item id="2b"></item>
-            <item id="2c"></item>
-            <item id="2d"></item>
-            <item id="2e"></item>
-            <item id="2f"></item>
-            <item id="2g"></item>
-            <item id="2h"></item>
+            <item id="2a" class="white"></item>
+            <item id="2b" class="black"></item>
+            <item id="2c" class="white"></item>
+            <item id="2d" class="black"></item>
+            <item id="2e" class="white"></item>
+            <item id="2f" class="black"></item>
+            <item id="2g" class="white"></item>
+            <item id="2h" class="black"></item>
         </grid>
         <grid>
-            <item id="1a"></item>
-            <item id="1b"></item>
-            <item id="1c"></item>
-            <item id="1d"></item>
-            <item id="1e"></item>
-            <item id="1f"></item>
-            <item id="1g"></item>
-            <item id="1h"></item>
+            <item id="1a" class="white"></item>
+            <item id="1b" class="black"></item>
+            <item id="1c" class="white"></item>
+            <item id="1d" class="black"></item>
+            <item id="1e" class="white"></item>
+            <item id="1f" class="black"></item>
+            <item id="1g" class="white"></item>
+            <item id="1h" class="black"></item>
         </grid>
          </div>;
     }
