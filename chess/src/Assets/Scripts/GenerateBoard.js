@@ -6,10 +6,6 @@ class GenerateBoard extends React.Component{
         super(props);
         this.board=this.board.bind(this);
     }
-    componentDidMount(props){
-
-    }
-
     board(){
         const board =<div className={style.board}><grid>
             <item id="8a" className={style.white}></item>

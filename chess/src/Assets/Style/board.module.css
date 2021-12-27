@@ -1,13 +1,13 @@
 .board{
     background-color: whitesmoke;
-    height: 800px;
-    width: 800px;
+    height: 640px;
+    width: 640px;
     border: solid 3px black;
     margin: 20px;
+    
 }
 .black{
     background-color: black;
-  
 }
 .white{
     background-color: white;
