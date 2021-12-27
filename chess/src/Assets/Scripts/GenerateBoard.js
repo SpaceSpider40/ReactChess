@@ -1,12 +1,17 @@
 import React from "react";
-import style from "../Style/menu.module.css";
+import style from "../Style/board.module.css";
+
 class GenerateBoard extends React.Component{
-   constructor(props){
+   constructor(props){  
         super(props);
         this.board=this.board.bind(this);
     }
- board(){
-        const board =<div id="board"><grid>
+    componentDidMount(props){
+
+    }
+
+    board(){
+        const board =<div className={style.board}><grid>
             <item id="8a" className={style.white}></item>
             <item id="8b" className={style.black}></item>
             <item id="8c" className={style.white}></item>
@@ -88,6 +93,7 @@ class GenerateBoard extends React.Component{
             <item id="1h" className={style.white}></item>
         </grid>
          </div>;
+         return(board);
     }
 
 render(){
