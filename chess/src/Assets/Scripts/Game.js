@@ -1,5 +1,6 @@
 import React from "react";
 import Board from "./GenerateBoard";
+import Timer from "./Timer";
 
 class Game extends React.Component{
     constructor(props) {
@@ -20,7 +21,10 @@ class Game extends React.Component{
 
     render(){
         console.log(this.state.player1,this.state.player2);
-        return(<Board/>);
+        return(<div>
+            <Board/>
+            <Timer/>
+        </div>);
     }   
 }
 
