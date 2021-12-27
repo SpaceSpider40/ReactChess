@@ -94,3 +94,4 @@ render(){
 
 }
 }
+export default GenerateBoard;
