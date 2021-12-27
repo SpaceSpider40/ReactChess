@@ -6,14 +6,21 @@ class Game extends React.Component{
         super(props);   
 
         this.state = {
-            player1: this.props.player1,
-            player2: this.props.player2
+            player1: "",
+            player2: ""
         }
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            player1: props.player1,
+            player2: props.player2
+        })
     }
 
     render(){
         console.log(this.state.player1,this.state.player2);
-        return(<Board />);
+        return(<Board/>);
     }   
 }
 
