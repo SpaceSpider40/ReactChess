@@ -1,26 +1,19 @@
 import React from "react";
+import Board from "./GenerateBoard";
 
 class Game extends React.Component{
-<<<<<<< Updated upstream
-    constructor(props){
-        super(props);
-    
-    }
-   
-=======
     constructor(props) {
         super(props);   
 
-        this.getPlayerNames = this.getPlayerNames.bind(this);
+        this.state = {
+            player1: this.props.player1,
+            player2: this.props.player2
+        }
     }
 
-    getPlayerNames(p1,p2){
-        console.log(p1,p2);
-    }
-
->>>>>>> Stashed changes
     render(){
-        return('Game started')
+        console.log(this.state.player1,this.state.player2);
+        return(<Board />);
     }   
 }
 

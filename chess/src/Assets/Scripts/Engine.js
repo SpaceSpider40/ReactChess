@@ -7,23 +7,32 @@ class Engine extends React.Component{
         super(props);  
 
         this.state = {
-            player1: this.player1 = "player1",
-            player2: this.player2 = "player2"
+            player1: "",
+            player2: ""
         }
+
+        this.startGame = this.startGame.bind(this);
     }
 
     componentDidMount(){
         
     }
     
-
     startGame(p1,p2){
-        console.log(p1,p2);
+        console.log(p1,p2)
+        this.setState({
+            player1: p1,
+            player2: p2
+        })
     }
 
     render(){
+        console.log(this.state.player1,this.state.player1)
         return(
+            <div>
             <Menu startGame={this.startGame}/>
+            <Game player1={this.state.player1} player2={this.state.player2}/>
+            </div>
         )
     }
 }
