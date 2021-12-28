@@ -8,85 +8,77 @@ class GenerateBoard extends React.Component{
     }
     board(){
         const board =<div className={style.board}><grid>
-            <item id="8a" className={style.white}></item>
-            <item id="8b" className={style.black}></item>
-            <item id="8c" className={style.white}></item>
-            <item id="8d" className={style.black}></item>
-            <item id="8e" className={style.white}></item>
-            <item id="8f" className={style.black}></item>
-            <item id="8g" className={style.white}></item>
-            <item id="8h" className={style.white}></item>
-        </grid>
-        <grid>
-            <item id="7a" className={style.white}></item>
-            <item id="7b" className={style.black}></item>
-            <item id="7c" className={style.white}></item>
-            <item id="7d" className={style.black}></item>
-            <item id="7e" className={style.white}></item>
-            <item id="7f" className={style.black}></item>
-            <item id="7g" className={style.white}></item>
-            <item id="7h" className={style.white}></item>
-        </grid>
-
-        <grid>
-            <item id="6a" className={style.white}></item>
-            <item id="6b" className={style.black}></item>
-            <item id="6c" className={style.white}></item>
-            <item id="6d" className={style.black}></item>
-            <item id="6e" className={style.white}></item>
-            <item id="6f" className={style.black}></item>
-            <item id="6g" className={style.white}></item>
-            <item id="6h" className={style.white}></item>
-        </grid>
-        <grid>
-            <item id="5a" className={style.white}></item>
-            <item id="5b" className={style.black}></item>
-            <item id="5c" className={style.white}></item>
-            <item id="5d" className={style.black}></item>
-            <item id="5e" className={style.white}></item>
-            <item id="5f" className={style.black}></item>
-            <item id="5g" className={style.white}></item>
-            <item id="5h" className={style.white}></item>
-        </grid>
-        <grid>
-            <item id="4a" className={style.white}></item>
-            <item id="4b" className={style.black}></item>
-            <item id="4c" className={style.white}></item>
-            <item id="4d" className={style.black}></item>
-            <item id="4e" className={style.white}></item>
-            <item id="4f" className={style.black}></item>
-            <item id="4g" className={style.white}></item>
-            <item id="4h" className={style.white}></item>
-        </grid>
-        <grid>
-            <item id="3a" className={style.white}></item>
-            <item id="3b" className={style.black}></item>
-            <item id="3c" className={style.white}></item>
-            <item id="3d" className={style.black}></item>
-            <item id="3e" className={style.white}></item>
-            <item id="3f" className={style.black}></item>
-            <item id="3g" className={style.white}></item>
-            <item id="3h" className={style.white}></item>
-        </grid>
-        <grid>
-            <item id="2a" className={style.white}></item>
-            <item id="2b" className={style.black}></item>
-            <item id="2c" className={style.white}></item>
-            <item id="2d" className={style.black}></item>
-            <item id="2e" className={style.white}></item>
-            <item id="2f" className={style.black}></item>
-            <item id="2g" className={style.white}></item>
-            <item id="2h" className={style.white}></item>
-        </grid>
-        <grid>
-            <item id="1a" className={style.white}></item>
-            <item id="1b" className={style.black}></item>
-            <item id="1c" className={style.white}></item>
-            <item id="1d" className={style.black}></item>
-            <item id="1e" className={style.white}></item>
-            <item id="1f" className={style.black}></item>
-            <item id="1g" className={style.white}></item>
-            <item id="1h" className={style.white}></item>
+            <item><button id="8c" className={style.white}></button></item>
+            <item><button id="8b" className={style.black}></button></item>
+            <item><button id="8c" className={style.white}></button></item>
+            <item><button id="8d" className={style.black}></button></item>
+            <item><button id="8e" className={style.white}></button></item>
+            <item><button id="8f" className={style.black}></button></item>
+            <item><button id="8g" className={style.white}></button></item>
+            <item><button id="8h" className={style.black}></button></item>
+        </grid> <grid>
+            <item><button id="7c" className={style.black}></button></item>
+            <item><button id="7b" className={style.white}></button></item>
+            <item><button id="7c" className={style.black}></button></item>
+            <item><button id="7d" className={style.white}></button></item>
+            <item><button id="7e" className={style.black}></button></item>
+            <item><button id="7f" className={style.white}></button></item>
+            <item><button id="7g" className={style.black}></button></item>
+            <item><button id="7h" className={style.white}></button></item>
+        </grid><grid>
+            <item><button id="6c" className={style.white}></button></item>
+            <item><button id="6b" className={style.black}></button></item>
+            <item><button id="6c" className={style.white}></button></item>
+            <item><button id="6d" className={style.black}></button></item>
+            <item><button id="6e" className={style.white}></button></item>
+            <item><button id="6f" className={style.black}></button></item>
+            <item><button id="6g" className={style.white}></button></item>
+            <item><button id="6h" className={style.black}></button></item>
+        </grid><grid>
+            <item><button id="5c" className={style.black}></button></item>
+            <item><button id="5b" className={style.white}></button></item>
+            <item><button id="5c" className={style.black}></button></item>
+            <item><button id="5d" className={style.white}></button></item>
+            <item><button id="5e" className={style.black}></button></item>
+            <item><button id="5f" className={style.white}></button></item>
+            <item><button id="5g" className={style.black}></button></item>
+            <item><button id="5h" className={style.white}></button></item>
+        </grid> <grid>
+            <item><button id="4c" className={style.white}></button></item>
+            <item><button id="4b" className={style.black}></button></item>
+            <item><button id="4c" className={style.white}></button></item>
+            <item><button id="4d" className={style.black}></button></item>
+            <item><button id="4e" className={style.white}></button></item>
+            <item><button id="4f" className={style.black}></button></item>
+            <item><button id="4g" className={style.white}></button></item>
+            <item><button id="4h" className={style.black}></button></item>
+        </grid><grid>
+            <item><button id="3c" className={style.black}></button></item>
+            <item><button id="3b" className={style.white}></button></item>
+            <item><button id="3c" className={style.black}></button></item>
+            <item><button id="3d" className={style.white}></button></item>
+            <item><button id="3e" className={style.black}></button></item>
+            <item><button id="3f" className={style.white}></button></item>
+            <item><button id="3g" className={style.black}></button></item>
+            <item><button id="3h" className={style.white}></button></item>
+        </grid> <grid>
+            <item><button id="2c" className={style.white}></button></item>
+            <item><button id="2b" className={style.black}></button></item>
+            <item><button id="2c" className={style.white}></button></item>
+            <item><button id="2d" className={style.black}></button></item>
+            <item><button id="2e" className={style.white}></button></item>
+            <item><button id="2f" className={style.black}></button></item>
+            <item><button id="2g" className={style.white}></button></item>
+            <item><button id="2h" className={style.black}></button></item>
+        </grid><grid>
+            <item><button id="1c" className={style.black}></button></item>
+            <item><button id="1b" className={style.white}></button></item>
+            <item><button id="1c" className={style.black}></button></item>
+            <item><button id="1d" className={style.white}></button></item>
+            <item><button id="1e" className={style.black}></button></item>
+            <item><button id="1f" className={style.white}></button></item>
+            <item><button id="1g" className={style.black}></button></item>
+            <item><button id="1h" className={style.white}></button></item>
         </grid>
          </div>;
          return(board);
