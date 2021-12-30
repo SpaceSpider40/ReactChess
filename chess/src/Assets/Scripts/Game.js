@@ -1,5 +1,6 @@
 import React from "react";
 import Board from "./GenerateBoard";
+import { Bishop } from "./Pawns";
 import Timer from "./Timer";
 
 class Game extends React.Component{
@@ -23,6 +24,7 @@ class Game extends React.Component{
         console.log(this.state.player1,this.state.player2);
         return(<div>
             <Board/>
+            <Bishop player={2}/>
             <Timer/>
         </div>);
     }   

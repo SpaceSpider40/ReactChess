@@ -1,4 +1,5 @@
 import React from "react";
+import Bbishop from "../Sprites/pawns/Bbishop.png"
 
 export class King extends React.Component{
     constructor(props){
@@ -22,6 +23,10 @@ export class King extends React.Component{
 
     pathfinding(currentLocation, destination){
         return [];
+    }
+
+    render(){
+        return null
     }
 }
 
@@ -74,13 +79,16 @@ export class Queen extends React.Component{
 
         return path;
     }
+
+    render(){
+        return null
+    }
 }
 
 export class Bishop extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Wbishop"/>}) : this.setState({img: <img src="../Sprites/pawns/Bbishop"/>});
+        this.props.player === 1? this.state={img: <img src="/Assets/Sprites/pawns/Rbishop.png"/>} : this.state={img: <img src="/Assets/Sprites/pawns/Bbishop.png"/>};
     }
 
     checkMove(currentLocation, destination){
@@ -112,6 +120,10 @@ export class Bishop extends React.Component{
 
         return path;
     }
+
+    render(){
+        return null
+    }
 }
 
 export class Knight extends React.Component{
@@ -136,6 +148,10 @@ export class Knight extends React.Component{
 
     pathfinding(currentLocation, destination){
         return [];
+    }
+
+    render(){
+        return null
     }
 }
 
@@ -180,6 +196,10 @@ export class Tower extends React.Component{
 
         return path;
     }
+
+    render(){
+        return null
+    }
 }
 
 export class Pawn extends React.Component{
@@ -210,5 +230,9 @@ export class Pawn extends React.Component{
         }else if(destination===currentLocation+16){
             return [currentLocation+8];
         }return [];
+    }
+
+    render(){
+        return null
     }
 }
