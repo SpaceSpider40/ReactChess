@@ -14,14 +14,15 @@ class Game extends React.Component{
 
         this.state = {
             player1: "",
-            player2: ""
+            player2: "",
+            RedFallenPices: [],
+            BlueFallenPices: [],
+            turn: 1,
+            feedback: "",
+            fields: this.initChessBoard()
         }
 
         this.handleOnClick = this.handleOnClick.bind(this);
-    }
-
-    componentDidMount(){
-        this.initChessBoard();
     }
 
     componentWillReceiveProps(props) {
@@ -32,7 +33,11 @@ class Game extends React.Component{
     }
 
     handleOnClick(spot){
-        console.log("click handled", spot)
+        const fields = this.state.fields.slice();
+        
+        if(fields[spot] && fields[spot].player === this.state.player){
+            
+        }
     }
 
     initChessBoard(){
