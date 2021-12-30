@@ -22,8 +22,8 @@ class Game extends React.Component{
     render(){
         console.log(this.state.player1,this.state.player2);
         return(<div>
+             <Timer/>
             <Board/>
-            <Timer/>
         </div>);
     }   
 }
