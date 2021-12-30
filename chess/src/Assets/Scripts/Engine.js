@@ -19,7 +19,6 @@ class Engine extends React.Component{
     }
     
     startGame(p1,p2){
-        console.log(p1,p2)
         this.setState({
             player1: p1,
             player2: p2
@@ -27,7 +26,6 @@ class Engine extends React.Component{
     }
 
     render(){
-        console.log(this.state.player1,this.state.player1)
         return(
             <div>
             <Menu startGame={this.startGame}/>

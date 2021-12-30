@@ -8,8 +8,8 @@ class GenerateBoard extends React.Component{
     }
     board(){
         const board =<div className={style.board}><div className={style.row}>
-            <button className={style.white}></button>
-            <button className={style.black}></button>
+            <button onClick={()=>this.props.handleOnClick(1)} className={style.white}></button>
+            <button onClick={()=>this.props.handleOnClick(2)} className={style.black}></button>
             <button className={style.white}></button>
             <button className={style.black}></button>
             <button className={style.white}></button>

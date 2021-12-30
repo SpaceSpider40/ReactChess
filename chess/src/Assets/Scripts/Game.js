@@ -1,6 +1,11 @@
 import React from "react";
 import Board from "./GenerateBoard";
 import { Bishop } from "./Pawns";
+import { King } from "./Pawns";
+import { Queen } from "./Pawns";
+import { Knight } from "./Pawns";
+import { Tower } from "./Pawns";
+import { Pawn } from "./Pawns";
 import Timer from "./Timer";
 
 class Game extends React.Component{
@@ -11,6 +16,12 @@ class Game extends React.Component{
             player1: "",
             player2: ""
         }
+
+        this.handleOnClick = this.handleOnClick.bind(this);
+    }
+
+    componentDidMount(){
+        this.initChessBoard();
     }
 
     componentWillReceiveProps(props) {
@@ -20,11 +31,45 @@ class Game extends React.Component{
         })
     }
 
+    handleOnClick(spot){
+        console.log("click handled", spot)
+    }
+
+    initChessBoard(){
+        const fields = Array(64).fill(null);
+
+        for(var i = 8; i<16;i++){
+            fields[i] = new Pawn(2)
+            fields[i+40] = new Pawn(1)
+        }
+
+        fields[0]=new Tower(2);
+        fields[7]=new Tower(2);
+        fields[56]=new Tower(1);
+        fields[63]=new Tower(1);
+
+        fields[1]=new Knight(2);
+        fields[6]=new Knight(2);
+        fields[57]=new Knight(1);
+        fields[62]=new Knight(1);
+
+        fields[2]=new Bishop(2);
+        fields[5]=new Bishop(2);
+        fields[58]=new Bishop(1);
+        fields[61]=new Bishop(1);
+
+        fields[3]=new Queen(2);
+        fields[4]=new King(2);
+        fields[59]=new Queen(1);
+        fields[60]=new King(1);
+
+        return fields;
+    }
+
     render(){
-        console.log(this.state.player1,this.state.player2);
         return(<div>
-             <Timer/>
-            <Board/>
+            <Timer/>
+            <Board handleOnClick={this.handleOnClick}/>
         </div>);
     }   
 }
