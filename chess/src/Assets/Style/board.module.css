@@ -4,17 +4,19 @@
     margin: 20px;
     
 }
+.row{
+    height: 12.5%;
+
+}
 .black{
     background-color: black;
     width: 12.5%;
-    height:12.5%;
+    height:100%;
     color: white;
-
-    
 }
 .white{
     background-color: white;
     width: 12.5%;
-    height: 12.5%;
+    height: 100%;
     color:black;
 }
