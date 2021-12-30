@@ -5,7 +5,7 @@ export class King extends React.Component{
     constructor(props){
         super(props);
         this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Wking"/>}) : this.setState({img: <img src="../Sprites/pawns/Bking"/>});
+        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rking"/>}) : this.setState({img: <img src="../Sprites/pawns/Bking"/>});
     }
 
     checkMove(currentLocation, destination){
@@ -34,7 +34,7 @@ export class Queen extends React.Component{
     constructor(props) {
         super(props);
         this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Wqueen"/>}) : this.setState({img: <img src="../Sprites/pawns/Bqueen"/>});
+        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rqueen"/>}) : this.setState({img: <img src="../Sprites/pawns/Bqueen"/>});
     }
 
     checkMove(currentLocation, destination){
@@ -130,7 +130,7 @@ export class Knight extends React.Component{
     constructor(props) {
         super(props);
         this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Wknight"/>}) : this.setState({img: <img src="../Sprites/pawns/Bknight"/>});
+        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rknight"/>}) : this.setState({img: <img src="../Sprites/pawns/Bknight"/>});
     }
 
     checkMove(currentLocation, destination){
@@ -159,7 +159,7 @@ export class Tower extends React.Component{
     constructor(props) {
         super(props);
         this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Wtower"/>}) : this.setState({img: <img src="../Sprites/pawns/Btower"/>});
+        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rtower"/>}) : this.setState({img: <img src="../Sprites/pawns/Btower"/>});
     }
 
     checkMove(currentLocation, destination){
@@ -206,7 +206,7 @@ export class Pawn extends React.Component{
     constructor(props) {
         super(props);
         this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Wpawn"/>}) : this.setState({img: <img src="../Sprites/pawns/Bpawn"/>});
+        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rpawn"/>}) : this.setState({img: <img src="../Sprites/pawns/Bpawn"/>});
 
         this.initPos = {
             1: [48,49,50,51,52,53,54,55],
