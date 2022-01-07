@@ -1,11 +1,11 @@
 import React from "react";
-import Bbishop from "../Sprites/pawns/Bbishop.png"
+//import Bbishop from "../Sprites/pawns/Bbishop.png"
 
 export class King extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rking"/>}) : this.setState({img: <img src="../Sprites/pawns/Bking"/>});
+    constructor(player){
+        super(player, (player === 1?"../Sprites/pawns/Rking":"../Sprites/pawns/Bking"));
+
+        this.player = player;
     }
 
     checkMove(currentLocation, destination){
@@ -31,10 +31,10 @@ export class King extends React.Component{
 }
 
 export class Queen extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rqueen"/>}) : this.setState({img: <img src="../Sprites/pawns/Bqueen"/>});
+    constructor(player) {
+        super(player, (player === 1?"../Sprites/pawns/Rqueen":"../Sprites/pawns/Bqueen"));
+
+        this.player = player;
     }
 
     checkMove(currentLocation, destination){
@@ -86,9 +86,10 @@ export class Queen extends React.Component{
 }
 
 export class Bishop extends React.Component{
-    constructor(props) {
-        super(props);
-        this.props.player === 1? this.state={img: <img src="/Assets/Sprites/pawns/Rbishop.png"/>} : this.state={img: <img src="/Assets/Sprites/pawns/Bbishop.png"/>};
+    constructor(player) {
+        super(player, (player === 1?"../Sprites/pawns/Rbishop":"../Sprites/pawns/Bbishop"));
+
+        this.player = player;
     }
 
     checkMove(currentLocation, destination){
@@ -127,10 +128,10 @@ export class Bishop extends React.Component{
 }
 
 export class Knight extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rknight"/>}) : this.setState({img: <img src="../Sprites/pawns/Bknight"/>});
+    constructor(player) {
+        super(player, (player === 1?"../Sprites/pawns/Rknight":"../Sprites/pawns/Bknight"));
+
+        this.player = player;
     }
 
     checkMove(currentLocation, destination){
@@ -156,10 +157,10 @@ export class Knight extends React.Component{
 }
 
 export class Tower extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rtower"/>}) : this.setState({img: <img src="../Sprites/pawns/Btower"/>});
+    constructor(player) {
+        super(player, (player === 1? "../Sprites/pawns/Rtower":"../Sprites/pawns/Btower"));
+
+        this.player = player;
     }
 
     checkMove(currentLocation, destination){
@@ -203,10 +204,10 @@ export class Tower extends React.Component{
 }
 
 export class Pawn extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {img: ''};
-        this.props.player === 1? this.setState({img: <img src="../Sprites/pawns/Rpawn"/>}) : this.setState({img: <img src="../Sprites/pawns/Bpawn"/>});
+    constructor(player) {
+        super(player, (player === 1? "../Sprites/pawns/Rpawn":"../Sprites/pawns/Bpawn"));
+
+        this.player = player;
 
         this.initPos = {
             1: [48,49,50,51,52,53,54,55],
