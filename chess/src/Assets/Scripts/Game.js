@@ -1,4 +1,5 @@
 import React from "react";
+import GenerateBoard from "./GenerateBoard";
 import Board from "./GenerateBoard";
 import { Bishop } from "./Pawns";
 import { King } from "./Pawns";
@@ -25,6 +26,7 @@ class Game extends React.Component{
         }
 
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.GenerateBoard = this.GenerateBoard.bind(this);
     }
 
     componentWillReceiveProps(props) {
@@ -37,12 +39,13 @@ class Game extends React.Component{
     handleOnClick(spot){
         const fields = this.state.fields.slice();
         
-        console.log(fields[spot].player);
+        //console.log(fields[spot].player);
+
         console.log(this.state.selection);
 
         if(this.state.selection === -1){
             if(!fields[spot] || fields[spot].player !== this.state.currPlayer){
-                this.setState({feedback: "Niepoprawny wybór"})
+                this.setState({feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"})
             }else{
                 this.setState({
                     feedback: "Wybierz gdzie chcesz przesunąć pionek",
@@ -109,7 +112,7 @@ class Game extends React.Component{
     }
 
     initChessBoard(){
-        const fields = Array(64).fill(0);
+        const fields = Array(64).fill(null);
 
         for(var i = 8; i<16;i++){
             fields[i] = new Pawn(2)
@@ -135,6 +138,8 @@ class Game extends React.Component{
         fields[4] = new King(2);
         fields[59] = new Queen(1);
         fields[60] = new King(1);
+
+        //GenerateBoard.UpdateGraphic(0, fields[0].url);
 
         return fields;
     }

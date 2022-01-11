@@ -1,30 +1,33 @@
 import React from "react";
 import style from "../Style/board.module.css";
+import Bpawn from "../Sprites/pawns/Bpawn.png"
 
 class GenerateBoard extends React.Component{
    constructor(props){  
         super(props);
         this.board=this.board.bind(this);
+        this.state = {srcs: []};
     }
     board(){
+        const srcs = this.state.srcs.slice();
         const board =<div className={style.board}><div className={style.row}>
-            <button onClick={()=>this.props.handleOnClick(1)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(2)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(3)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(4)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(5)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(6)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(7)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(8)} className={style.black}></button>
+            <button onClick={()=>this.props.handleOnClick(1)} className={style.white}><img src={srcs[0]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(2)} className={style.black}><img src={srcs[1]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(3)} className={style.white}><img src={srcs[2]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(4)} className={style.black}><img src={srcs[3]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(5)} className={style.white}><img src={srcs[4]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(6)} className={style.black}><img src={srcs[5]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(7)} className={style.white}><img src={srcs[6]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(8)} className={style.black}><img src={srcs[7]} alt=""/></button>
         </div><div className={style.row}>
-            <button onClick={()=>this.props.handleOnClick(9)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(10)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(11)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(12)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(13)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(14)} className={style.white}></button>
-            <button onClick={()=>this.props.handleOnClick(15)} className={style.black}></button>
-            <button onClick={()=>this.props.handleOnClick(16)} className={style.white}></button>
+            <button onClick={()=>this.props.handleOnClick(9)} className={style.black}><img src={srcs[8]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(10)} className={style.white}><img src={srcs[9]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(11)} className={style.black}><img src={srcs[10]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(12)} className={style.white}><img src={srcs[11]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(13)} className={style.black}><img src={srcs[12]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(14)} className={style.white}><img src={srcs[13]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(15)} className={style.black}><img src={srcs[14]} alt=""/></button>
+            <button onClick={()=>this.props.handleOnClick(16)} className={style.white}><img src={srcs[15]} alt=""/></button>
         </div><div className={style.row}>
             <button onClick={()=>this.props.handleOnClick(17)} className={style.white}></button>
             <button onClick={()=>this.props.handleOnClick(18)} className={style.black}></button>
@@ -84,9 +87,12 @@ class GenerateBoard extends React.Component{
          return(board);
     }
 
-render(){
-    return(this.board());
+    UpdateGraphic(field, img){
+        this.state.srcs[field]=img;
+    }
 
-}
+    render(){
+        return(this.board());
+    }
 }
 export default GenerateBoard;
