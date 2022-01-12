@@ -1,6 +1,5 @@
 import React from "react";
-import GenerateBoard from "./GenerateBoard";
-import Board from "./GenerateBoard";
+import BoardGenerator from "./BoardGenarator";
 import { Bishop } from "./Pawns";
 import { King } from "./Pawns";
 import { Queen } from "./Pawns";
@@ -22,11 +21,10 @@ class Game extends React.Component{
             turn: "red",
             feedback: "",
             fields: this.initChessBoard(),
-            selection: -1
+            selection: -1,
         }
 
         this.handleOnClick = this.handleOnClick.bind(this);
-        this.GenerateBoard = this.GenerateBoard.bind(this);
     }
 
     componentWillReceiveProps(props) {
@@ -37,6 +35,7 @@ class Game extends React.Component{
     }
 
     handleOnClick(spot){
+
         const fields = this.state.fields.slice();
         
         //console.log(fields[spot].player);
@@ -45,14 +44,19 @@ class Game extends React.Component{
 
         if(this.state.selection === -1){
             if(!fields[spot] || fields[spot].player !== this.state.currPlayer){
-                this.setState({feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"})
+                this.setState({
+                    feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"
+                });
+                delete fields[spot].style.backgroundColor;
             }else{
+                fields[spot].style = {...fields[spot].style, backgroundColor: "black"};
                 this.setState({
                     feedback: "Wybierz gdzie chcesz przesunąć pionek",
                     selection: spot
                 })
             }
         }else if(this.state.selection > -1){
+            delete fields[this.state.selection].style.backgroundColor;
             if(fields[spot] && fields[spot].player === this.state.currPlayer){
                 this.setState({
                     feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
@@ -139,7 +143,7 @@ class Game extends React.Component{
         fields[59] = new Queen(1);
         fields[60] = new King(1);
 
-        //GenerateBoard.UpdateGraphic(0, fields[0].url);
+        console.log(fields)
 
         return fields;
     }
@@ -147,7 +151,7 @@ class Game extends React.Component{
     render(){
         return(<div>
             <Timer/>
-            <Board handleOnClick={this.handleOnClick}/>
+            <BoardGenerator fields = {this.state.fields} onClick={(spot) => this.handleOnClick(spot)}></BoardGenerator>
             {this.state.feedback}
         </div>);
     }   
