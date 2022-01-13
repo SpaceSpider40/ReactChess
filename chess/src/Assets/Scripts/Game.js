@@ -1,6 +1,5 @@
 import React from "react";
-import GenerateBoard from "./GenerateBoard";
-import Board from "./GenerateBoard";
+import BoardGenerator from "./BoardGenarator";
 import { Bishop } from "./Pawns";
 import { King } from "./Pawns";
 import { Queen } from "./Pawns";
@@ -22,11 +21,10 @@ class Game extends React.Component{
             turn: "red",
             feedback: "",
             fields: this.initChessBoard(),
-            selection: -1
+            selection: -1,
         }
 
         this.handleOnClick = this.handleOnClick.bind(this);
-        this.GenerateBoard = this.GenerateBoard.bind(this);
     }
 
     componentWillReceiveProps(props) {
@@ -37,22 +35,30 @@ class Game extends React.Component{
     }
 
     handleOnClick(spot){
+
         const fields = this.state.fields.slice();
         
         //console.log(fields[spot].player);
 
         console.log(this.state.selection);
+        //console.log("przed", fields[spot].style);
 
         if(this.state.selection === -1){
             if(!fields[spot] || fields[spot].player !== this.state.currPlayer){
-                this.setState({feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"})
+                this.setState({
+                    feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"
+                });
+                //if(fields[spot]!=null){delete(fields[spot].style.backgroundColor)}null;
             }else{
+                fields[spot].style = {...fields[spot].style, backgroundColor: "black"};
+                console.log("2", fields[spot].style);
                 this.setState({
                     feedback: "Wybierz gdzie chcesz przesunąć pionek",
                     selection: spot
                 })
             }
         }else if(this.state.selection > -1){
+            delete fields[this.state.selection].style.backgroundColor;
             if(fields[spot] && fields[spot].player === this.state.currPlayer){
                 this.setState({
                     feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
@@ -99,6 +105,8 @@ class Game extends React.Component{
                 selection: -1
             })
         }
+
+        console.log("po", fields[spot].style);
     }
 
     legalMove(pathfind){
@@ -115,8 +123,8 @@ class Game extends React.Component{
         const fields = Array(64).fill(null);
 
         for(var i = 8; i<16;i++){
-            fields[i] = new Pawn(2)
-            fields[i+40] = new Pawn(1)
+            fields[i] = new Pawn(2, {backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg')"})
+            fields[i+40] = new Pawn(1, {backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg')"})
         }
 
         fields[0] = new Tower(2);
@@ -139,7 +147,8 @@ class Game extends React.Component{
         fields[59] = new Queen(1);
         fields[60] = new King(1);
 
-        //GenerateBoard.UpdateGraphic(0, fields[0].url);
+        console.log(fields)
+        console.log(fields[8].style)
 
         return fields;
     }
@@ -147,7 +156,7 @@ class Game extends React.Component{
     render(){
         return(<div>
             <Timer/>
-            <Board handleOnClick={this.handleOnClick}/>
+            <BoardGenerator fields = {this.state.fields} onClick={(spot) => this.handleOnClick(spot)}></BoardGenerator>
             {this.state.feedback}
         </div>);
     }   

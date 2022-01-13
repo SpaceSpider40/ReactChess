@@ -204,15 +204,9 @@ export class Tower extends React.Component{
 }
 
 export class Pawn extends React.Component{
-    constructor(player, url) {
-        super(player, (url = player ===1?"Rpawn":"Bpawn"));
-
-        this.player = player;
-
-        if(this.player===1){
-            this.state={url: "Rpawn"}
-        }this.state={url: "Bpawn"}
-
+    constructor({player, style}) {
+        super({player, style})
+        
         this.initPos = {
             1: [48,49,50,51,52,53,54,55],
             2: [8,9,10,11,12,13,14,15]
@@ -236,7 +230,7 @@ export class Pawn extends React.Component{
             return [currentLocation+8];
         }return [];
     }
-
+pp
     render(){
         return null
     }
