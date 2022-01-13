@@ -12,14 +12,14 @@ export default class Board extends React.Component {
         for(var i = 0; i < 8; i++){
             const rows = [];
             for(var j = 0; j < 8 ; j++){
-                const fieldColour = (isEven(i) && isEven(j)) || (!isEven(i) && !isEven(j))?"style.white":"style.black";
+                const fieldColour = (isEven(i) && isEven(j)) || (!isEven(i) && !isEven(j))?"white":"black";
                 rows.push(this.createField((i*8)+j, fieldColour));
             }
-            board.push(<div className="BoardRow">{rows}</div>);
+            board.push(<div className="Row">{rows}</div>);
         }
 
         return(
-            <div>
+            <div className="board">
                 {board}
             </div>
         );

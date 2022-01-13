@@ -47,7 +47,7 @@ class Game extends React.Component{
                 this.setState({
                     feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"
                 });
-                delete fields[spot].style.backgroundColor;
+              
             }else{
                 fields[spot].style = {...fields[spot].style, backgroundColor: "black"};
                 this.setState({
@@ -56,7 +56,7 @@ class Game extends React.Component{
                 })
             }
         }else if(this.state.selection > -1){
-            delete fields[this.state.selection].style.backgroundColor;
+   
             if(fields[spot] && fields[spot].player === this.state.currPlayer){
                 this.setState({
                     feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
