@@ -9,6 +9,10 @@ export class King extends React.Component{
         this.player = player;
     }
 
+    getPlayer() {
+        return this.player
+    }
+
     checkMove(currentLocation, destination){
         return(
             currentLocation - 9 === destination ||
@@ -37,6 +41,10 @@ export class Queen extends React.Component{
         
         this.style = style;
         this.player = player;
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
@@ -95,6 +103,10 @@ export class Bishop extends React.Component{
         this.player = player;
     }
 
+    getPlayer() {
+        return this.player
+    }
+
     checkMove(currentLocation, destination){
         return Math.abs(currentLocation-destination)%9===0 || Math.abs(currentLocation-destination)%7===0;
     }
@@ -138,6 +150,10 @@ export class Knight extends React.Component{
         this.player = player;
     }
 
+    getPlayer() {
+        return this.player
+    }
+
     checkMove(currentLocation, destination){
         return(
             currentLocation - 17 === destination ||
@@ -166,6 +182,10 @@ export class Tower extends React.Component{
             
             this.style = style;
             this.player = player;
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
@@ -219,6 +239,10 @@ export class Pawn extends React.Component{
             1: [48,49,50,51,52,53,54,55],
             2: [8,9,10,11,12,13,14,15]
         }
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination, occupied){
