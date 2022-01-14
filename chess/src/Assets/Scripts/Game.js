@@ -48,7 +48,7 @@ class Game extends React.Component{
                 this.setState({
                     feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"
                 });
-                //if(fields[spot]!=null){delete(fields[spot].style.backgroundColor)}null;
+                //delete(fields[spot].style.backgroundColor);
             }else{
                 fields[spot].style = {...fields[spot].style, backgroundColor: "black"};
                 console.log("2", fields[spot].style);
@@ -58,7 +58,7 @@ class Game extends React.Component{
                 })
             }
         }else if(this.state.selection > -1){
-            delete fields[this.state.selection].style.backgroundColor;
+            //delete fields[this.state.selection].style.backgroundColor;
             if(fields[spot] && fields[spot].player === this.state.currPlayer){
                 this.setState({
                     feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
@@ -106,7 +106,7 @@ class Game extends React.Component{
             })
         }
 
-        console.log("po", fields[spot].style);
+       // console.log("po", fields[spot].style);
     }
 
     legalMove(pathfind){

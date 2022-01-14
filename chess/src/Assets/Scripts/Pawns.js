@@ -204,9 +204,12 @@ export class Tower extends React.Component{
 }
 
 export class Pawn extends React.Component{
-    constructor({player, style}) {
-        super({player, style})
+    constructor(player, style) {
+        super(player)
         
+        this.style = style;
+        this.player = player;
+
         this.initPos = {
             1: [48,49,50,51,52,53,54,55],
             2: [8,9,10,11,12,13,14,15]
@@ -230,7 +233,7 @@ export class Pawn extends React.Component{
             return [currentLocation+8];
         }return [];
     }
-pp
+
     render(){
         return null
     }
