@@ -7,7 +7,18 @@ import { Knight } from "./Pawns";
 import { Tower } from "./Pawns";
 import { Pawn } from "./Pawns";
 import Timer from "./Timer";
-
+import Bpawn from "../Sprites/pawns/Bpawn.png";
+import Btower from "../Sprites/pawns/Btower.png";
+import Bknight from "../Sprites/pawns/Bknight.png";
+import Bbishop from "../Sprites/pawns/Bbishop.png";
+import Bking from "../Sprites/pawns/Bking.png";
+import Bqueen from "../Sprites/pawns/Bqueen.png";
+import Rpawn from "../Sprites/pawns/Rpawn.png";
+import Rtower from "../Sprites/pawns/Rtower.png";
+import Rknight from "../Sprites/pawns/Rknight.png";
+import Rbishop from "../Sprites/pawns/Rbishop.png";
+import Rking from "../Sprites/pawns/Rking.png";
+import Rqueen from "../Sprites/pawns/Rqueen.png";
 class Game extends React.Component{
     constructor(props) {
         super(props);   
@@ -123,29 +134,29 @@ class Game extends React.Component{
         const fields = Array(64).fill(null);
 
         for(var i = 8; i<16;i++){
-            fields[i] = new Pawn(2, {backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg')"})
-            fields[i+40] = new Pawn(1, {backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/4/45/Chess_plt45.svg')"})
+            fields[i] = new Pawn(2, {backgroundImage: `url(${Bpawn})`})
+            fields[i+40] = new Pawn(1, {backgroundImage: `url(${Rpawn})`})
         }
 
-        fields[0] = new Tower(2);
-        fields[7] = new Tower(2);
-        fields[56] = new Tower(1);
-        fields[63] = new Tower(1);
+        fields[0] = new Tower(2,{backgroundImage: `url(${Btower})`});
+        fields[7] = new Tower(2,{backgroundImage: `url(${Btower})`});
+        fields[56] = new Tower(1,{backgroundImage: `url(${Rtower})`});
+        fields[63] = new Tower(1,{backgroundImage: `url(${Rtower})`});
 
-        fields[1] = new Knight(2);
-        fields[6] = new Knight(2);
-        fields[57] = new Knight(1);
-        fields[62] = new Knight(1);
+        fields[1] = new Knight(2,{backgroundImage: `url(${Bknight})`});
+        fields[6] = new Knight(2,{backgroundImage: `url(${Bknight})`});
+        fields[57] = new Knight(1,{backgroundImage: `url(${Rknight})`});
+        fields[62] = new Knight(1,{backgroundImage: `url(${Rknight})`});
 
-        fields[2] = new Bishop(2);
-        fields[5] = new Bishop(2);
-        fields[58] = new Bishop(1);
-        fields[61] = new Bishop(1);
+        fields[2] = new Bishop(2,{backgroundImage: `url(${Bbishop})`});
+        fields[5] = new Bishop(2,{backgroundImage: `url(${Bbishop})`});
+        fields[58] = new Bishop(1,{backgroundImage: `url(${Rbishop})`});
+        fields[61] = new Bishop(1,{backgroundImage: `url(${Rbishop})`});
 
-        fields[3] = new Queen(2);
-        fields[4] = new King(2);
-        fields[59] = new Queen(1);
-        fields[60] = new King(1);
+        fields[3] = new Queen(2,{backgroundImage: `url(${Bqueen})`});
+        fields[4] = new King(2,{backgroundImage: `url(${Bking})`});
+        fields[59] = new Queen(1,{backgroundImage: `url(${Rqueen})`});
+        fields[60] = new King(1,{backgroundImage: `url(${Rking})`});
 
         console.log(fields)
         console.log(fields[8].style)

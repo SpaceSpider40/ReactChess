@@ -2,9 +2,10 @@ import React from "react";
 //import Bbishop from "../Sprites/pawns/Bbishop.png"
 
 export class King extends React.Component{
-    constructor(player){
-        super(player, (player === 1?"../Sprites/pawns/Rking":"../Sprites/pawns/Bking"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
     }
 
@@ -31,9 +32,10 @@ export class King extends React.Component{
 }
 
 export class Queen extends React.Component{
-    constructor(player) {
-        super(player, (player === 1?"../Sprites/pawns/Rqueen":"../Sprites/pawns/Bqueen"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
     }
 
@@ -86,9 +88,10 @@ export class Queen extends React.Component{
 }
 
 export class Bishop extends React.Component{
-    constructor(player) {
-        super(player, (player === 1?"../Sprites/pawns/Rbishop":"../Sprites/pawns/Bbishop"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
     }
 
@@ -128,9 +131,10 @@ export class Bishop extends React.Component{
 }
 
 export class Knight extends React.Component{
-    constructor(player) {
-        super(player, (player === 1?"../Sprites/pawns/Rknight":"../Sprites/pawns/Bknight"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
     }
 
@@ -157,10 +161,11 @@ export class Knight extends React.Component{
 }
 
 export class Tower extends React.Component{
-    constructor(player) {
-        super(player, (player === 1? "../Sprites/pawns/Rtower":"../Sprites/pawns/Btower"));
-
-        this.player = player;
+        constructor(player, style) {
+            super(player)
+            
+            this.style = style;
+            this.player = player;
     }
 
     checkMove(currentLocation, destination){
