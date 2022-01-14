@@ -16,8 +16,8 @@ class Game extends React.Component{
             player1: "",
             player2: "",
             currPlayer: 1,
-            RedFallenPices: [],
-            BlueFallenPices: [],
+            redKnockedoutPieces: [],
+            blueKnockedoutPieces: [],
             turn: "red",
             feedback: "",
             fields: this.initChessBoard(),
@@ -34,7 +34,7 @@ class Game extends React.Component{
         })
     }
 
-    handleOnClick(spot){
+    LEGACY_handleOnClick(spot){
 
         const fields = this.state.fields.slice();
         
@@ -50,7 +50,7 @@ class Game extends React.Component{
                 });
                 //delete(fields[spot].style.backgroundColor);
             }else{
-                fields[spot].style = {...fields[spot].style, backgroundColor: "black"};
+                fields[spot].style = {...fields[spot].style, backgroundColor: "gray"};
                 console.log("2", fields[spot].style);
                 this.setState({
                     feedback: "Wybierz gdzie chcesz przesunąć pionek",
@@ -66,8 +66,8 @@ class Game extends React.Component{
                 });
             }else{
                 const fields = this.state.fields.slice();
-                const redFallenPices = this.state.RedFallenPices.slice();
-                const blueFallenPices = this.state.BlueFallenPices.slice();
+                const redKnockedoutPieces = this.state.redKnockedoutPieces.slice();
+                const blueKnockedoutPieces = this.state.blueKnockedoutPieces.slice();
                 const destinationOccupied = fields[spot]? true : false;
                 const movePosible = fields[this.state.selection].checkMove(this.state.selection, spot, destinationOccupied);
                 const pathfind = fields[this.state.selection].pathfinding(this.state.selection, spot);
@@ -76,14 +76,14 @@ class Game extends React.Component{
                 if(movePosible && legalMove){
                     if(fields[spot] !== null){
                         if(fields[spot].player === 1){
-                            redFallenPices.push(fields[spot]);
+                            redKnockedoutPieces.push(fields[spot]);
                         }else{
-                            blueFallenPices.push(fields[spot]);
+                            blueKnockedoutPieces.push(fields[spot]);
                         }
                     }
                 }
-                console.log("redFallenPieces", redFallenPices);
-                console.log("blueFallenPieces", blueFallenPices);
+                console.log("redFallenPieces", redKnockedoutPieces);
+                console.log("blueFallenPieces", blueKnockedoutPieces);
 
                 fields[spot] = fields[this.state.selection];
                 fields[this.state.selection] = null;
@@ -92,8 +92,8 @@ class Game extends React.Component{
                 this.setState({
                     selection: -1,
                     fields: fields,
-                    RedFallenPices: redFallenPices,
-                    BlueFallenPices: blueFallenPices,
+                    RedFallenPices: redKnockedoutPieces,
+                    BlueFallenPices: blueKnockedoutPieces,
                     currPlayer: player,
                     feedback:'',
                     turn: turn
@@ -107,6 +107,88 @@ class Game extends React.Component{
         }
 
        // console.log("po", fields[spot].style);
+    }
+
+    handleOnClick(spot){
+        const fields = [...this.state.fields];
+
+        if(this.state.selection === -1){
+            if(!fields[spot] || fields[spot].player !== this.state.currPlayer){
+                this.setState({feedback: "Wybierz pionki gracza numer " + this.state.currPlayer});
+                if(fields[spot]){
+                    fields[spot].style = {...fields[spot].style, backgroundColor: ""};
+                }
+            }else{
+                fields[spot].style = {...fields[spot], backgroundColor: "gray"};
+                this.setState({
+                    feedback: "Wybierz miejsce docelowe dla pionka",
+                    selection: -1
+                })
+            }return;
+        }
+
+        fields[this.state.selection].style = {...fields[this.state.selection].style, backgroundColor: ""};
+
+        if(fields[spot] && fields[spot].player === this.state.currPlayer){
+            this.setState({
+                feedback: "Błędny wybór. Wybierz ponownie miejsce docelowe dla pionka",
+                selection: -1
+            })
+        }else{
+            const redKnockedoutPieces = [];
+            const blueKnockedoutPieces = [];
+            const occupiedByEnemy = Boolean(fields[spot]);
+            const checkMove = fields[this.state.selection].checkMove(this.state.selection, spot, occupiedByEnemy);
+
+            if(checkMove){
+                if(fields[spot]!==null){
+                    if(fields[spot].player===1) redKnockedoutPieces.push(fields[spot]);
+                    else blueKnockedoutPieces.push(fields[spot]);
+                }
+
+                fields[spot] = fields[this.state.selection];
+                fields[this.state.selection] = null;
+
+                const checked = this.CheckedPlayer(fields, this.state.currPlayer);
+
+                if(checked){
+                    this.setState(oldState => ({
+                        feedback: "Błędny wybór. Wybierz ponownie miejsce docelowe dla pionka. Gracz "+this.state.currPlayer+" został zaszachowany",
+                        selection: -1,
+                    }))
+                }else{
+                    var player = this.state.currPlayer === 1?2:1;
+                    var turn = this.state.turn === 'red'?'blue':'red'
+
+                    this.setState(oldState=>({
+                        selection:-1,
+                        fields,
+                        redKnockedoutPieces: [...oldState.redFallenPices, ...redKnockedoutPieces],
+                        blueKnockedoutPieces: [...oldState.blueFallenPices, ...blueKnockedoutPieces],
+                        currPlayer: player,
+                        feedback: '',
+                        turn
+                    }));
+                }
+
+            }else{
+                this.setState({
+                    feedback: "Błędny wybór. Wybierz ponownie miejsce docelowe dla pionka",
+                    selection: -1
+                })
+            }
+        }
+    }
+
+    KingPos(fields, player){
+        return fields.reduce((active, current, spot)=>active || ((current &&(current.getPlayer() === player))&&(current instanceof King) && spot),null)
+    }
+
+    CheckedPlayer(fields, player){
+        const opfor = player === 1 ? 2 : 1;
+        const playersKingPos = this.KingPos(fields, player)
+        const kingEndangered = (piece, spot) => piece.isMovePossible(playersKingPos, spot, fields)
+        return fields.reduce((acc,curr,idx)=>acc||(curr && (curr.getPlayer() === opfor)&&kingEndangered(curr, idx)&& true),false)
     }
 
     legalMove(pathfind){
@@ -156,7 +238,7 @@ class Game extends React.Component{
     render(){
         return(<div>
             <Timer/>
-            <BoardGenerator fields = {this.state.fields} onClick={(spot) => this.handleOnClick(spot)}></BoardGenerator>
+            <BoardGenerator fields = {this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
             {this.state.feedback}
         </div>);
     }   
