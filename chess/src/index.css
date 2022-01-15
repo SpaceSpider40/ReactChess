@@ -24,10 +24,10 @@ code {
   color:black;
 }
 .board{
-  height: 640px;
-  width: 640px;
-  margin: 20px;
-  
+  height: 1000px;
+  width: 1000px;
+  margin: 2px;
+  float: right;
 }
 .Row{
   height: 12.5%;

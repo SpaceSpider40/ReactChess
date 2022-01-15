@@ -250,7 +250,7 @@ class Game extends React.Component {
         return (<div>
             <Timer />
             <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
-            {this.state.feedback}
+            <p>{this.state.feedback}</p>
         </div>);
     }
 }
