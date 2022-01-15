@@ -246,10 +246,10 @@ export class Pawn extends React.Component{
     }
 
     checkMove(currentLocation, destination, occupied){
-        if(this.props.player === 1){
+        if(this.player === 1){
             if((destination === currentLocation - 8 && !occupied) || (destination === currentLocation - 16 && this.initPos[1].indexOf(currentLocation) !== -1)) return true;
             else if(occupied && (destination === currentLocation - 9 || destination === currentLocation - 7)) return true;
-        } else if(this.props.player === 2){
+        } else if(this.player === 2){
             if((destination === currentLocation + 8 && !occupied) || (destination === currentLocation + 16 && this.initPos[2].indexOf(currentLocation) !== -1)) return true;
             else if(occupied && (destination === currentLocation + 9 || destination === currentLocation + 7)) return true;
         }return false;
