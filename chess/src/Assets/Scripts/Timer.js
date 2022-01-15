@@ -5,10 +5,11 @@ class Timer extends React.Component{
         super(props);
        
         this.state = {
-            timer:  0,
-            times: [10]
+            seconds:  0,
+            times: []
         }
         this.endturn= this.endturn.bind(this);
+        this.table =this.table.bind(this);
     }
 
     componentDidMount(){
@@ -17,23 +18,42 @@ class Timer extends React.Component{
 
     tick(){
         this.setState({
-            timer:this.state.timer+1
+            seconds:this.state.seconds+1
         })
     }
     endturn(){
         clearInterval(this.timerID);
-       this.setState({
-           timer:0
-       });
-        this.newtimer =setInterval(()=>this.tick(),1000)
-    
-    }
-
+       let num = this.state.seconds;
+       console.log(num);
+       
+        this.setState(previousState => ({
+            times: [previousState.times,num ]
+        }));
+              
+              this.setState({
+                  seconds: 0
+              })
+              this.clock =setInterval(()=>this.tick(),1000);
+             
+            }
+        table(){
+            
+            return(<ol>
+            {this.times.map((time)=>(
+                <li>{time}</li>
+            ))}
+        </ol>
+            );
+            
+        }
     render(){
         return(<div>
-            {this.times}
-            <p>{this.state.timer}</p>
+            <h2>Czas tury</h2>
+            <p> 
+                {this.state.seconds}
+            </p>
             <button className={style.endturn} onClick={this.endturn}>Endturn</button>
+         <p>{this.times}</p>
         </div>);
     }
 }
