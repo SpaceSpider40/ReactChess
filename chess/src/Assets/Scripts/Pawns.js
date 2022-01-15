@@ -49,7 +49,7 @@ export class Queen extends React.Component{
 
     checkMove(currentLocation, destination){
 
-        let mod = currentLocation * 8;
+        let mod = currentLocation % 8;
         let diff = 8 - mod;
 
         return(         
@@ -72,7 +72,7 @@ export class Queen extends React.Component{
         if(Math.abs(currentLocation-destination)%8===0){
             increment = 8;
             start += 8;
-        }else if(Math.abs(currentLocation)%9===0){
+        }else if(Math.abs(currentLocation-destination)%9===0){
             increment = 9;
             start += 9;
         }else if(Math.abs(currentLocation-destination)%7===0){
