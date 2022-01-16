@@ -37,11 +37,11 @@ class Timer extends React.Component{
               this.timerID =setInterval(()=>this.tick(),1000);
               console.log(this.state.times);
             }
-     
+    //<button className={style.endturn} onClick={this.endturn}>Endturn</button>
     render(){
         return(<div className={style.timer}>
             <h2>Time of player {this.state.player} turn   {this.state.seconds}</h2>
-            <button className={style.endturn} onClick={this.endturn}>Endturn</button>
+            
                  <ul>Times of players turns
                  {this.state.times.slice(-5).map((time)=>(
                    <li key={time.id}>{time}</li>

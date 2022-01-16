@@ -1,5 +1,6 @@
 import React from "react";
 import BoardGenerator from "./BoardGenarator";
+import style from "../Style/game.module.css";
 import { Bishop } from "./Pawns";
 import { King } from "./Pawns";
 import { Queen } from "./Pawns";
@@ -19,6 +20,7 @@ import Rknight from "../Sprites/pawns/Rknight.png";
 import Rbishop from "../Sprites/pawns/Rbishop.png";
 import Rking from "../Sprites/pawns/Rking.png";
 import Rqueen from "../Sprites/pawns/Rqueen.png";
+import KnockedoutBlock from "./KnockedoutPices";
 
 class Game extends React.Component {
     constructor(props) {
@@ -114,6 +116,7 @@ class Game extends React.Component {
                             feedback: '',
                             turn: turn
                         })
+                        this.timer.endturn();
                     } else {
                         this.setState({
                             feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
@@ -247,9 +250,12 @@ class Game extends React.Component {
 
     render() {
         return (<div>
-            <Timer player={this.state.currPlayer} />
+            <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} />
             <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
-            <p>{this.state.feedback}</p>
+            <p className={style.feedback}>{this.state.feedback}</p>
+            <div>
+                {<KnockedoutBlock redKnockedoutPieces={this.state.redKnockedoutPieces} blueKnockedoutPieces={this.state.blueKnockedoutPieces}/>}
+            </div>
         </div>);
     }
 }
