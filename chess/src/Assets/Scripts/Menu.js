@@ -30,12 +30,12 @@ class Menu extends React.Component{
     createPage(){
         const page = <div className={this.state.pageStyle}>
             <div className={style.label}>
-                <div className={style.title}>Chess</div>
+                <div className={style.title}>SZACHY</div>
             </div>
             <div className={style.buttonsContainer}>
                 <div className={style.inputPlayerNames}>
-                    Player1 Name: <input type="text" name="player1" value={this.state.player1} onChange={this.handleChange} className={style.inputPlayerName}/><br/>
-                    Player2 Name: <input type="text" name="player2" value={this.state.player2} onChange={this.handleChange} className={style.inputPlayerName}/>
+                    Gracz 1: <input type="text" name="player1" value={this.state.player1} onChange={this.handleChange} className={style.inputPlayerName}/><br/>
+                    Gracz 2: <input type="text" name="player2" value={this.state.player2} onChange={this.handleChange} className={style.inputPlayerName}/>
                 </div>
                 <button className={style.btnStart} onClick={()=>this.handleClick()}>Start Game</button>
             </div>

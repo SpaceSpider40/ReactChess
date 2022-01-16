@@ -58,7 +58,7 @@ class Game extends React.Component {
 
     LEGACY_handleOnClick(spot) {
 
-        if (this.state.gameState==="RUNNING"){
+        if (this.state.gameState === "RUNNING") {
             const fields = this.state.fields.slice();
 
             //console.log(fields[spot].player);
@@ -100,10 +100,10 @@ class Game extends React.Component {
                     if (movePosible && legalMove) {
                         if (fields[spot] !== null) {
                             if (fields[spot].player === 1) {
-                                if(fields[spot] instanceof King) this.gameOver(1)
+                                if (fields[spot] instanceof King) this.gameOver(1)
                                 redKnockedoutPieces.push(fields[spot]);
                             } else {
-                                if(fields[spot] instanceof King) this.gameOver(2)
+                                if (fields[spot] instanceof King) this.gameOver(2)
                                 blueKnockedoutPieces.push(fields[spot]);
                             }
                         }
@@ -133,23 +133,23 @@ class Game extends React.Component {
                     }
                 }
             }
-        }else{
+        } else {
             this.setState({
                 feedback: "Proszę podać graczy i nacisnąć przycisk start"
             })
         }
     }
 
-    gameOver(player){
+    gameOver(player) {
         this.setState({
-            gameState:"Over"
+            gameState: "Over"
         })
-        if(player===1){
+        if (player === 1) {
             this.setState({
                 winner: this.state.player2 + " Wygrywa!",
                 winnerStyle: style.winnerMSG
             })
-        }else{
+        } else {
             this.setState({
                 winner: this.state.player1 + " Wygrywa!",
                 winnerStyle: style.winnerMSG
@@ -274,14 +274,22 @@ class Game extends React.Component {
     }
 
     render() {
+        var player = this.state.currPlayer===1?this.state.player1:this.state.player2
+        var playerStyle = this.state.currPlayer===1?style.playerR:style.playerB
         return (<div className={this.state.gameStyle}>
-            <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br/>   
-            <p className={style.feedback}>{this.state.feedback}</p>
-            <div>
-                {<KnockedoutBlock redKnockedoutPieces={this.state.redKnockedoutPieces} blueKnockedoutPieces={this.state.blueKnockedoutPieces}/>}
+            <div className={style.leftPanel}>
+                <p className={playerStyle}>Tura: {player}</p>
+                <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br />
+                <p className={style.feedback}>{this.state.feedback}</p>
+                <div>
+                    {<KnockedoutBlock redKnockedoutPieces={this.state.redKnockedoutPieces} blueKnockedoutPieces={this.state.blueKnockedoutPieces} />}
+                </div>
+                <p className={this.state.winnerStyle}>{this.state.winner}</p>
             </div>
-            <p className={this.state.winnerStyle}>{this.state.winner}</p>
-            <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
+            <div className={style.board}>
+                <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
+            </div>
+
         </div>);
     }
 }

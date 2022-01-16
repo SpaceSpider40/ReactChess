@@ -45,9 +45,7 @@ class Timer extends React.Component{
     render(){
         return(<div className={style.timer}>
             <h2>Akutalny czas tury: {this.state.seconds}s</h2>
-            
-                 <ul>Tabela czasów:
-                 {this.state.times.slice(-5).map((time)=>(
+                 <ul>Tabela czasów:{this.state.times.slice(-5).map((time)=>(
                    <li key={time.id}>{time}s</li>
                    
                 ))}

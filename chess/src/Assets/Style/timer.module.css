@@ -1,4 +1,15 @@
 .timer{
     float: left;
     display: block;
+    margin: 0px;
+}
+.timer ul{
+    border: solid 2px black;
+    margin: 1px;
+    padding: 2px;
+    list-style: none;
+}
+.timer h2{
+    padding: 1px;
+    margin: 1px;
 }

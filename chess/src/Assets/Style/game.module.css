@@ -1,6 +1,9 @@
 .feedback{
     color: red;
     float: left;
+    position: absolute;
+    font-size: 1.7rem;
+    bottom: 0;
 }
 .winnerMSG{
     margin: 0;
@@ -23,4 +26,21 @@
 }
 .gameContainer{
     display: block;
+}
+.leftPanel{
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    display: block;
+    height: 90%;
+}
+.playerR{
+    color: red;
+    font-size: 3rem;
+    margin: 2px;
+}
+.playerB{
+    color: blue;
+    font-size: 3rem;
+    margin: 2px;
 }

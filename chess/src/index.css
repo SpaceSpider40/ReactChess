@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 body {
-  margin: 4;
+  margin: 0;
   font-family: 'Varela Round', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 code {
