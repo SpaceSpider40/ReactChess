@@ -13,16 +13,16 @@ export default class KnockedoutBlock extends React.Component{
         return <Field piece={field} style={field.style}/>
     }
     
-    componentWillReceiveProps(props){
-        this.state.redKnockedoutPieces.push(props.redKnockedoutPieces);
-        this.state.blueKnockedoutPieces.push(props.blueKnockedoutPieces);
+    knocked(redKnockedoutPieces,blueKnockedoutPieces){
+        this.state.redKnockedoutPieces.push(redKnockedoutPieces);
+        this.state.blueKnockedoutPieces.push(blueKnockedoutPieces);
+        return(<h5>zzzzzzz</h5>)
     }
     
     render(){
-        console.log(this.state.redKnockedoutPieces);
-        console.log(this.state.blueKnockedoutPieces);
-        return(
+        return( 
             <div>
+                <h1>Zbite</h1>
                 <div>{this.state.redKnockedoutPieces.map((rs,index)=>this.createField(rs,index))}</div>
                 <div>{this.state.blueKnockedoutPieces.map((bs,index)=>this.createField(bs,index))}</div>
             </div>
