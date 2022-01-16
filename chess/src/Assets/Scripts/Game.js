@@ -102,11 +102,15 @@ class Game extends React.Component {
                             if (fields[spot].player === 1) {
                                 if (fields[spot] instanceof King) this.gameOver(1)
                                 redKnockedoutPieces.push(fields[spot]);
+                                this.knocked.knockedR(fields[spot]);
                             } else {
                                 if (fields[spot] instanceof King) this.gameOver(2)
                                 blueKnockedoutPieces.push(fields[spot]);
+                                this.knocked.knockedB(fields[spot]);
                             }
                         }
+
+                        
 
                         console.log("redFallenPieces", redKnockedoutPieces);
                         console.log("blueFallenPieces", blueKnockedoutPieces);
@@ -193,7 +197,7 @@ class Game extends React.Component {
                     if (fields[spot].player === 1) redKnockedoutPieces.push(fields[spot]);
                     else blueKnockedoutPieces.push(fields[spot]);
                 }
-                this.knocked.knocked(this.state.redKnockedoutPieces,this.state.blueKnockedoutPieces);
+                
                 fields[spot] = fields[this.state.selection];
                 fields[this.state.selection] = null;
 
@@ -283,7 +287,7 @@ class Game extends React.Component {
                 <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br />
                 <p className={style.feedback}>{this.state.feedback}</p>
                 <div>
-                    <KnockedoutBlock redKnockedoutPieces={this.state.redKnockedoutPieces} blueKnockedoutPieces={this.state.blueKnockedoutPieces} ref={instances=>{this.knocked =instances}}/>
+                    <KnockedoutBlock ref={instances=>{this.knocked = instances}}/>
                 </div>
                 <p className={this.state.winnerStyle}>{this.state.winner}</p>
             </div>

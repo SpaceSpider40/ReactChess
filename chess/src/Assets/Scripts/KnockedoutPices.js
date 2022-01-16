@@ -10,13 +10,14 @@ export default class KnockedoutBlock extends React.Component{
         }
     }
     createField(field, spot, colour){
-        return <Field piece={field} style={field.style}/>
+        return <Field key={spot} keyVal={spot} piece={field} style={field.style}/>
     }
     
-    knocked(redKnockedoutPieces,blueKnockedoutPieces){
-        this.state.redKnockedoutPieces.push(redKnockedoutPieces);
-        this.state.blueKnockedoutPieces.push(blueKnockedoutPieces);
-        return(<h5>zzzzzzz</h5>)
+    knockedR(tab){
+        this.state.redKnockedoutPieces.push(tab);
+    }
+    knockedB(tab){
+        this.state.blueKnockedoutPieces.push(tab);
     }
     
     render(){
