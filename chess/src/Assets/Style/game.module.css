@@ -1,3 +1,12 @@
 .feedback{
     color: red;
+    float: left;
+}
+.winnerMSG{
+    position: absolute;
+    font-size: 10rem;
+    color: black;
+    top: 25%;
+    width: 100%;
+    text-align: center;
 }

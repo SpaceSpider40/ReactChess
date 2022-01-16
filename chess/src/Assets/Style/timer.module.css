@@ -1,6 +1,4 @@
-.endturn{
-    background-color: cadetblue;
-}
 .timer{
-    float: left;
+    float: none;
+    display: block;
 }

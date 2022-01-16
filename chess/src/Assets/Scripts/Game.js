@@ -36,7 +36,8 @@ class Game extends React.Component {
             feedback: "",
             fields: this.initChessBoard(),
             selection: -1,
-            gameState: "STOPED"
+            gameState: "STOPED",
+            winner: ""
         }
 
         this.LEGACY_handleOnClick = this.LEGACY_handleOnClick.bind(this);
@@ -48,6 +49,8 @@ class Game extends React.Component {
             player2: props.player2,
             gameState: "RUNNING"
         })
+
+        this.timer.start(this.state.currPlayer);
     }
 
     LEGACY_handleOnClick(spot) {
@@ -94,8 +97,10 @@ class Game extends React.Component {
                     if (movePosible && legalMove) {
                         if (fields[spot] !== null) {
                             if (fields[spot].player === 1) {
+                                if(fields[spot] instanceof King) this.gameOver(1)
                                 redKnockedoutPieces.push(fields[spot]);
                             } else {
+                                if(fields[spot] instanceof King) this.gameOver(2)
                                 blueKnockedoutPieces.push(fields[spot]);
                             }
                         }
@@ -128,6 +133,21 @@ class Game extends React.Component {
         }else{
             this.setState({
                 feedback: "Proszę podać graczy i nacisnąć przycisk start"
+            })
+        }
+    }
+
+    gameOver(player){
+        this.setState({
+            gameState:"Over"
+        })
+        if(player===1){
+            this.setState({
+                winner: this.state.player2 + " Wygrywa!"
+            })
+        }else{
+            this.setState({
+                winner: this.state.player1 + " Wygrywa!"
             })
         }
     }
@@ -250,12 +270,13 @@ class Game extends React.Component {
 
     render() {
         return (<div>
-            <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} />
-            <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
+            <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br/>   
             <p className={style.feedback}>{this.state.feedback}</p>
             <div>
                 {<KnockedoutBlock redKnockedoutPieces={this.state.redKnockedoutPieces} blueKnockedoutPieces={this.state.blueKnockedoutPieces}/>}
             </div>
+            <p className={style.winnerMSG}>{this.state.winner}</p>
+            <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
         </div>);
     }
 }
