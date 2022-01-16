@@ -5,6 +5,9 @@ class Timer extends React.Component{
         super(props);
        
         this.state = {
+            player1: "",
+            player2: "",
+            player:"",
             seconds:  0,
             times: []
         };
@@ -12,10 +15,14 @@ class Timer extends React.Component{
 
     }
 
-    componentDidMount(){
+    componentWillReceiveProps(props) {
+        this.setState({
+
+            player: props.player
+          
+        });
         this.timerID = setInterval(()=>this.tick(),1000)
-    }
-   s
+    } 
     tick(){
         this.setState({
             seconds:this.state.seconds+1
@@ -33,11 +40,9 @@ class Timer extends React.Component{
      
     render(){
         return(<div className={style.timer}>
-            <h2>Czas tury {this.state.seconds}</h2>
-            
+            <h2>Time of player {this.state.player} turn   {this.state.seconds}</h2>
             <button className={style.endturn} onClick={this.endturn}>Endturn</button>
-                 <ul>Czasy tur
-                     
+                 <ul>Times of players turns
                  {this.state.times.slice(-5).map((time)=>(
                    <li key={time.id}>{time}</li>
                    

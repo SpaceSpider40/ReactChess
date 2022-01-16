@@ -105,7 +105,6 @@ class Game extends React.Component {
                         fields[this.state.selection] = null;
                         var player = this.state.currPlayer === 1 ? 2 : 1;
                         var turn = this.state.turn === 'red' ? 'black' : 'red';
-                        //DODAJ TUTAJ ZAPIS CZASU TRWANIA TURY
                         this.setState({
                             selection: -1,
                             fields: fields,
@@ -248,7 +247,7 @@ class Game extends React.Component {
 
     render() {
         return (<div>
-            <Timer />
+            <Timer player={this.state.currPlayer} />
             <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
             <p>{this.state.feedback}</p>
         </div>);
