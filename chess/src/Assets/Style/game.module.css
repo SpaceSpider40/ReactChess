@@ -4,6 +4,7 @@
     position: absolute;
     font-size: 1.7rem;
     bottom: 0;
+    padding:5px;
 }
 .winnerMSG{
     margin: 0;
@@ -33,14 +34,19 @@
     float: left;
     display: block;
     height: 90%;
+    width: 45%;
+    text-align: center;
 }
 .playerR{
-    color: red;
+    color: #ad1111;
     font-size: 3rem;
     margin: 2px;
+    border-bottom: solid 2px;
+    text-align: center;
 }
 .playerB{
-    color: blue;
+    color: rgb(24, 24, 167);
     font-size: 3rem;
     margin: 2px;
+    text-align: center;
 }
