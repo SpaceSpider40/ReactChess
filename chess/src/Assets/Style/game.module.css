@@ -3,10 +3,24 @@
     float: left;
 }
 .winnerMSG{
+    margin: 0;
     position: absolute;
-    font-size: 10rem;
+    font-size: 8rem;
     color: black;
     top: 25%;
-    width: 100%;
+    width: 99%;
     text-align: center;
+    background-color: rgba(59, 59, 59, 0.719);
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.winnerMSGHidden{
+    display: none;
+    text-align: center;
+}
+.gameContainerHidden{
+    display: none;
+}
+.gameContainer{
+    display: block;
 }

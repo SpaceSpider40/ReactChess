@@ -1,5 +1,23 @@
 .menuContainer{
-    float: left;
     display: inline;
-    width: 30%;
+    width: 100%;
+    text-align: center;
+}
+.menuContainerHidden{
+    display: none;
+}
+.title{
+    font-size: 10rem;
+    letter-spacing: 0.2em;
+}
+.buttonsContainer{
+    font-size: 2rem;
+}
+.inputPlayerName{
+    margin: 2px;
+    font-size: 2rem;
+}
+.btnStart{
+    margin: 20px;
+    font-size: 2rem;
 }

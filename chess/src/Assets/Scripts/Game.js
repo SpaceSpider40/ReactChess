@@ -37,7 +37,9 @@ class Game extends React.Component {
             fields: this.initChessBoard(),
             selection: -1,
             gameState: "STOPED",
-            winner: ""
+            winner: "",
+            winnerStyle: style.winnerMSGHidden,
+            gameStyle: style.gameContainerHidden
         }
 
         this.LEGACY_handleOnClick = this.LEGACY_handleOnClick.bind(this);
@@ -47,7 +49,8 @@ class Game extends React.Component {
         this.setState({
             player1: props.player1,
             player2: props.player2,
-            gameState: "RUNNING"
+            gameState: "RUNNING",
+            gameStyle: style.gameContainer
         })
 
         this.timer.start(this.state.currPlayer);
@@ -143,11 +146,13 @@ class Game extends React.Component {
         })
         if(player===1){
             this.setState({
-                winner: this.state.player2 + " Wygrywa!"
+                winner: this.state.player2 + " Wygrywa!",
+                winnerStyle: style.winnerMSG
             })
         }else{
             this.setState({
-                winner: this.state.player1 + " Wygrywa!"
+                winner: this.state.player1 + " Wygrywa!",
+                winnerStyle: style.winnerMSG
             })
         }
     }
@@ -269,13 +274,13 @@ class Game extends React.Component {
     }
 
     render() {
-        return (<div>
+        return (<div className={this.state.gameStyle}>
             <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br/>   
             <p className={style.feedback}>{this.state.feedback}</p>
             <div>
                 {<KnockedoutBlock redKnockedoutPieces={this.state.redKnockedoutPieces} blueKnockedoutPieces={this.state.blueKnockedoutPieces}/>}
             </div>
-            <p className={style.winnerMSG}>{this.state.winner}</p>
+            <p className={this.state.winnerStyle}>{this.state.winner}</p>
             <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
         </div>);
     }
