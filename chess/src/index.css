@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 body {
   margin: 0;
+  height: 100%;
   font-family: 'Varela Round', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,24 +12,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+#root{
+  height: 100%;
+  width: 100%;
+}
 .black{
   background-color: black;
   width: 12.5%;
   height:100%;
-  color: white;
+  
 }
 .white{
   background-color: white;
   width: 12.5%;
   height: 100%;
-  color:black;
+
 }
 .board{
-  height: 1000px;
-  width: 1000px;
+  border: solid 30px #2e2d2d;
+  height: 1025px;
+  width: 1025px;
   margin: 2px;
   float: right;
 }
 .Row{
   height: 12.5%;
+}
+button{
+  background-position:center;
+  background-repeat:no-repeat;
 }

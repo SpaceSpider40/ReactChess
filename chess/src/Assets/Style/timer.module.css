@@ -3,8 +3,7 @@
     margin: 0px;
 }
 .timer ul{
-    border-right: solid 2px black;
-    border-left: solid 2px black;
+    border: solid black 3px;
     margin: 1px;
     padding: 2px;
     list-style: none;
