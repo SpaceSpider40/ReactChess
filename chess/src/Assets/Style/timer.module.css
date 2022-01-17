@@ -1,13 +1,16 @@
 .timer{
-    float: left;
-    display: block;
+    width: 100%;
     margin: 0px;
 }
 .timer ul{
-    border: solid 2px black;
+    border-right: solid 2px black;
+    border-left: solid 2px black;
     margin: 1px;
     padding: 2px;
     list-style: none;
+}
+.timer ul li{
+    border-top: black 1px dashed;
 }
 .timer h2{
     padding: 1px;

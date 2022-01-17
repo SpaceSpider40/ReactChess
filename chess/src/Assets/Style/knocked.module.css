@@ -1,0 +1,41 @@
+.container{
+    float: right;
+    width: 100%;
+    margin: 1px;
+    padding: 1px;
+    border-top: solid 3px black;
+}
+.container h1{
+    margin: 1px;
+    padding: 1px;
+}
+.red button{
+    width: 125px;
+    height: 125px;
+    border: none;
+    background-color: transparent;
+    margin: -30px;
+    padding: 1px;
+}
+.red{
+    margin: 1px;
+    padding: 1px;
+    justify-content: end;
+    display: flex;
+    flex-wrap: wrap;
+}
+.blue button{
+    width: 125px;
+    height: 125px;
+    border: none;
+    background-color: transparent;
+    margin: -30px;
+    padding: 1px;
+}
+.blue{
+    margin: 1px;
+    padding: 1px;
+    justify-content: end;
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -129,6 +129,7 @@ class Game extends React.Component {
                             turn: turn
                         })
                         this.timer.endturn();
+                        this.timer.addNum();
                     } else {
                         this.setState({
                             feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
@@ -159,6 +160,7 @@ class Game extends React.Component {
                 winnerStyle: style.winnerMSG
             })
         }
+        this.timer.stop()
     }
 
     UNUSED_handleOnClick(spot) {
@@ -286,9 +288,7 @@ class Game extends React.Component {
                 <p className={playerStyle}>Tura: {player}</p>
                 <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br />
                 <p className={style.feedback}>{this.state.feedback}</p>
-                <div>
-                    <KnockedoutBlock ref={instances=>{this.knocked = instances}}/>
-                </div>
+                <KnockedoutBlock ref={instances=>{this.knocked = instances}}/>
                 <p className={this.state.winnerStyle}>{this.state.winner}</p>
             </div>
             <div className={style.board}>

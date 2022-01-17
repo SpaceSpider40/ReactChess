@@ -4,9 +4,7 @@ body {
   font-family: 'Varela Round', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-color: #85c8ff;
 }
 
 code {
