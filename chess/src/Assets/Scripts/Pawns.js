@@ -2,10 +2,15 @@ import React from "react";
 //import Bbishop from "../Sprites/pawns/Bbishop.png"
 
 export class King extends React.Component{
-    constructor(player){
-        super(player, (player === 1?"../Sprites/pawns/Rking":"../Sprites/pawns/Bking"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
@@ -31,15 +36,20 @@ export class King extends React.Component{
 }
 
 export class Queen extends React.Component{
-    constructor(player) {
-        super(player, (player === 1?"../Sprites/pawns/Rqueen":"../Sprites/pawns/Bqueen"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
 
-        let mod = currentLocation * 8;
+        let mod = currentLocation % 8;
         let diff = 8 - mod;
 
         return(         
@@ -62,7 +72,7 @@ export class Queen extends React.Component{
         if(Math.abs(currentLocation-destination)%8===0){
             increment = 8;
             start += 8;
-        }else if(Math.abs(currentLocation)%9===0){
+        }else if(Math.abs(currentLocation-destination)%9===0){
             increment = 9;
             start += 9;
         }else if(Math.abs(currentLocation-destination)%7===0){
@@ -86,10 +96,15 @@ export class Queen extends React.Component{
 }
 
 export class Bishop extends React.Component{
-    constructor(player) {
-        super(player, (player === 1?"../Sprites/pawns/Rbishop":"../Sprites/pawns/Bbishop"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
@@ -128,10 +143,15 @@ export class Bishop extends React.Component{
 }
 
 export class Knight extends React.Component{
-    constructor(player) {
-        super(player, (player === 1?"../Sprites/pawns/Rknight":"../Sprites/pawns/Bknight"));
-
+    constructor(player, style) {
+        super(player)
+        
+        this.style = style;
         this.player = player;
+    }
+
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
@@ -157,10 +177,15 @@ export class Knight extends React.Component{
 }
 
 export class Tower extends React.Component{
-    constructor(player) {
-        super(player, (player === 1? "../Sprites/pawns/Rtower":"../Sprites/pawns/Btower"));
+        constructor(player, style) {
+            super(player)
+            
+            this.style = style;
+            this.player = player;
+    }
 
-        this.player = player;
+    getPlayer() {
+        return this.player
     }
 
     checkMove(currentLocation, destination){
@@ -204,20 +229,27 @@ export class Tower extends React.Component{
 }
 
 export class Pawn extends React.Component{
-    constructor({player, style}) {
-        super({player, style})
+    constructor(player, style) {
+        super(player)
         
+        this.style = style;
+        this.player = player;
+
         this.initPos = {
             1: [48,49,50,51,52,53,54,55],
             2: [8,9,10,11,12,13,14,15]
         }
     }
 
+    getPlayer() {
+        return this.player
+    }
+
     checkMove(currentLocation, destination, occupied){
-        if(this.props.player === 1){
+        if(this.player === 1){
             if((destination === currentLocation - 8 && !occupied) || (destination === currentLocation - 16 && this.initPos[1].indexOf(currentLocation) !== -1)) return true;
             else if(occupied && (destination === currentLocation - 9 || destination === currentLocation - 7)) return true;
-        } else if(this.props.player === 2){
+        } else if(this.player === 2){
             if((destination === currentLocation + 8 && !occupied) || (destination === currentLocation + 16 && this.initPos[2].indexOf(currentLocation) !== -1)) return true;
             else if(occupied && (destination === currentLocation + 9 || destination === currentLocation + 7)) return true;
         }return false;
@@ -230,7 +262,7 @@ export class Pawn extends React.Component{
             return [currentLocation+8];
         }return [];
     }
-pp
+
     render(){
         return null
     }

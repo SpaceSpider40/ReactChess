@@ -1,0 +1,70 @@
+.feedback{
+    color: red;
+    float: left;
+    position: absolute;
+    font-size: 1.7rem;
+    bottom: 0;
+    padding:5px;
+}
+.winnerMSG{
+    margin: 0;
+    position: absolute;
+    font-size: 8rem;
+    color: black;
+    top: 25%;
+    width: 99%;
+    text-align: center;
+    background-color: rgb(255,215,0,0.877);
+    box-shadow: 0px 0px 24px 20px rgb(255,215,0,0.877);
+    padding-top: 30px;
+    padding-bottom: 30px;
+	        animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+}
+.winnerMSGHidden{
+    display: none;
+    text-align: center;
+}
+.gameContainerHidden{
+   
+    display: none;
+}
+.gameContainer{
+  
+    display: block;
+}
+.leftPanel{
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    display: block;
+    height: 90%;
+    width: 46.4%;
+    text-align: center;
+}
+.playerR{
+    color: #ad1111;
+    font-size: 3rem;
+    margin: 2px;
+    border-bottom: solid 2px;
+    text-align: center;
+}
+.playerB{
+    color: rgb(24, 24, 167);
+    font-size: 3rem;
+    margin: 2px;
+    text-align: center;
+    border-bottom: solid 2px;
+}
+  @keyframes slide-in-bck-center {
+    0% {
+      -webkit-transform: translateZ(600px);
+              transform: translateZ(600px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }

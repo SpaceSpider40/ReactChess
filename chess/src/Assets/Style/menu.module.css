@@ -1,0 +1,51 @@
+.menuContainer{
+    display: inline;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: #0f395c;
+}
+.menuContainerHidden{
+    display: none;
+}
+.title{
+    font-size: 10rem;
+    letter-spacing: 0.2em;
+}
+.buttonsContainer{
+    font-size: 2rem;
+}
+.inputPlayerName{
+    margin: 2px;
+    font-size: 2rem;
+    background-color: transparent;
+    border: #008cff solid 2px;
+    width: 200px;
+    transition: ease-in-out 1s;
+    color: #2288db;
+}
+.inputPlayerName:hover{
+    margin: 2px;
+    font-size: 2rem;
+    background-color: transparent;
+    border: #36a4ff solid 2px;
+    width: 300px;
+    color: #2288db;
+}
+.btnStart{
+    margin: 20px;
+    font-size: 2rem;
+    border: #008cff solid 2px;
+    letter-spacing: normal;
+    background-color: #98d0fd;
+    transition: ease-in-out 1s;
+    color: #0f395c;
+}
+.btnStart:hover{
+    margin: 20px;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    border: #229cff solid 2px;
+    background-color: #a6d7ff;
+    color: #2288db;
+}

@@ -8,7 +8,7 @@ class Engine extends React.Component{
 
         this.state = {
             player1: "",
-            player2: ""
+            player2: "",
         }
 
         this.startGame = this.startGame.bind(this);
