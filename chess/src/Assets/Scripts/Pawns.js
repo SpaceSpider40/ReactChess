@@ -267,3 +267,18 @@ export class Pawn extends React.Component{
         return null
     }
 }
+
+export class Empty extends React.Component{
+    constructor(player) {
+        super(player);
+
+        this.player = player;
+    }
+
+    checkMove(){return true}
+    pathfinding(){return []}
+
+    render(){
+        return null
+    }
+}

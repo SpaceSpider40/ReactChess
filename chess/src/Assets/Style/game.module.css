@@ -67,4 +67,21 @@
               transform: translateZ(0);
       opacity: 1;
     }
+}
+
+.board button{
+    width: 12.5%;
+    height:100%;
+    border: none;
+}
+.board{
+  border: solid 5px #2e2d2d;
+  height: 1025px;
+  width: 1025px;
+  margin: 2px;
+  float: right;
+}
+
+.row{
+    height: 12.5%;
   }
