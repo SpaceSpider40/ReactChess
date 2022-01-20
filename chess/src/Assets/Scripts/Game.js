@@ -95,20 +95,20 @@ class Game extends React.Component {
                     const fields = this.state.fields.slice();
                     const redKnockedoutPieces = this.state.redKnockedoutPieces.slice();
                     const blueKnockedoutPieces = this.state.blueKnockedoutPieces.slice();
-                    const destinationOccupied = fields[spot].player!==0 ? true : false;
+                    const destinationOccupied = fields[spot].player!==0 ? Boolean(fields[spot]) : false;
                     const movePosible = fields[this.state.selection].checkMove(this.state.selection, spot, destinationOccupied);
                     const pathfind = fields[this.state.selection].pathfinding(this.state.selection, spot);
                     const legalMove = this.legalMove(pathfind);
 
                     //console.log(movePosible, legalMove);
 
-                    if (movePosible && legalMove) {
+                    if (movePosible) {
                         if (fields[spot] !== Empty) {
                             if (fields[spot].player === 1) {
                                 if (fields[spot] instanceof King) this.gameOver(1)
                                 redKnockedoutPieces.push(fields[spot]);
                                 this.knocked.knockedR(fields[spot]);
-                            } else if(fields[spot].player ===2) {
+                            } else if(fields[spot].player === 2) {
                                 if (fields[spot] instanceof King) this.gameOver(2)
                                 blueKnockedoutPieces.push(fields[spot]);
                                 this.knocked.knockedB(fields[spot]);

@@ -1,5 +1,22 @@
 import React from "react";
-//import Bbishop from "../Sprites/pawns/Bbishop.png"
+import col from '../Dictionaries/col.json'
+import row from '../Dictionaries/row.json'
+import dialognalTLBR from '../Dictionaries/diagonalTLBR.json'
+import dialognalTRBL from '../Dictionaries/diagonalTRBL.json'
+
+const rowCheck = (currentLocation, destination) => {
+    return !!(row[currentLocation] &&  row[currentLocation][destination]);
+}
+
+const colCheck = (currentLocation, destination) => {
+    return !!(col[currentLocation]&&col[currentLocation][destination]);
+}
+
+const diagonalCheck = (currentLocation, destination) => {
+    return !!((dialognalTLBR[currentLocation]&&dialognalTLBR[currentLocation][destination])||(dialognalTRBL[currentLocation]&&dialognalTRBL[currentLocation][destination]));
+}
+
+const cleanPath = (pathfinding, fields)=>pathfinding.reduce((acc,curr)=>!fields[curr]&&acc,true);
 
 export class King extends React.Component{
     constructor(player, style) {
@@ -15,14 +32,14 @@ export class King extends React.Component{
 
     checkMove(currentLocation, destination){
         return(
-            currentLocation - 9 === destination ||
+            (currentLocation - 9 === destination && diagonalCheck(currentLocation, destination)) ||
             currentLocation - 8 === destination ||
-            currentLocation - 7 === destination ||
-            currentLocation - 1 === destination ||
-            currentLocation + 1 === destination ||
-            currentLocation + 7 === destination ||
+            (currentLocation - 7 === destination && diagonalCheck(currentLocation, destination)) ||
+            (currentLocation - 1 === destination && rowCheck(currentLocation,destination)) ||
+            (currentLocation + 1 === destination && rowCheck(currentLocation,destination)) ||
+            (currentLocation + 7 === destination && diagonalCheck(currentLocation, destination)) ||
             currentLocation + 8 === destination ||
-            currentLocation + 9 === destination
+            (currentLocation + 9 === destination && diagonalCheck(currentLocation, destination))
         );
     }
 
@@ -47,14 +64,10 @@ export class Queen extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination){
-
-        let mod = currentLocation % 8;
-        let diff = 8 - mod;
+    checkMove(currentLocation, destination, fields){
 
         return(         
-            (Math.abs(currentLocation - destination) % 9 === 0 || Math.abs(currentLocation - destination) % 7 === 0) ||
-            (Math.abs(currentLocation - destination) % 8 === 0 || (destination >= (currentLocation - mod) && destination < (currentLocation + diff)))
+            cleanPath(this.pathfinding(currentLocation, destination),fields)&&(diagonalCheck(currentLocation,destination)||row(currentLocation, destination)||colCheck(currentLocation,destination))
         );
     }
 
@@ -107,8 +120,8 @@ export class Bishop extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination){
-        return Math.abs(currentLocation-destination)%9===0 || Math.abs(currentLocation-destination)%7===0;
+    checkMove(currentLocation, destination, fields){
+        return cleanPath(this.pathfinding(currentLocation, destination),fields)&&diagonalCheck(currentLocation,destination);
     }
 
     pathfinding(currentLocation, destination){
@@ -156,14 +169,14 @@ export class Knight extends React.Component{
 
     checkMove(currentLocation, destination){
         return(
-            currentLocation - 17 === destination ||
-            currentLocation - 15 === destination ||
-            currentLocation - 10 === destination ||
-            currentLocation + 6 === destination ||
-            currentLocation + 15 === destination ||
-            currentLocation - 6 === destination ||
-            currentLocation + 10 === destination ||
-            currentLocation + 17 === destination
+            (currentLocation - 17 === destination && !rowCheck(currentLocation,destination)) ||
+            (currentLocation - 15 === destination && !rowCheck(currentLocation,destination))||
+            (currentLocation - 10 === destination && !rowCheck(currentLocation,destination))||
+            (currentLocation + 6 === destination && !rowCheck(currentLocation,destination))||
+            (currentLocation + 15 === destination && !rowCheck(currentLocation,destination))||
+            (currentLocation - 6 === destination && !rowCheck(currentLocation,destination))||
+            (currentLocation + 10 === destination && !rowCheck(currentLocation,destination))||
+            (currentLocation + 17 === destination && !rowCheck(currentLocation,destination))
         )
     }
 
@@ -188,12 +201,9 @@ export class Tower extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination){
-        let mod = currentLocation % 8;
-        let diff = 8 - mod;
-
+    checkMove(currentLocation, destination,fields){
         return(
-            Math.abs(currentLocation - destination)%8===0 || (destination >= (currentLocation - mod) && destination < (currentLocation + diff))
+            cleanPath(this.pathfinding(currentLocation,destination),fields) && (colCheck(currentLocation, destination)||rowCheck(currentLocation,destination))
         );
     }
 
@@ -248,10 +258,10 @@ export class Pawn extends React.Component{
     checkMove(currentLocation, destination, occupied){
         if(this.player === 1){
             if((destination === currentLocation - 8 && !occupied) || (destination === currentLocation - 16 && this.initPos[1].indexOf(currentLocation) !== -1)) return true;
-            else if(occupied && (destination === currentLocation - 9 || destination === currentLocation - 7)) return true;
+            else if(occupied && diagonalCheck(currentLocation,destination) && (destination === currentLocation - 9 || destination === currentLocation - 7)) return true;
         } else if(this.player === 2){
             if((destination === currentLocation + 8 && !occupied) || (destination === currentLocation + 16 && this.initPos[2].indexOf(currentLocation) !== -1)) return true;
-            else if(occupied && (destination === currentLocation + 9 || destination === currentLocation + 7)) return true;
+            else if(occupied && diagonalCheck(currentLocation,destination) && (destination === currentLocation + 9 || destination === currentLocation + 7)) return true;
         }return false;
     }
 
