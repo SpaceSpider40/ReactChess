@@ -45,7 +45,7 @@ class Timer extends React.Component {
             seconds: 0
         })
         this.timerID = setInterval(() => this.tick(), 1000);
-        console.log(this.state.times);
+        //console.log(this.state.times);
     }
     //<button className={style.endturn} onClick={this.endturn}>Endturn</button>
     render() {;

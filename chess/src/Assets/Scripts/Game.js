@@ -62,13 +62,14 @@ class Game extends React.Component {
         if (this.state.gameState === "RUNNING") {
             const fields = this.state.fields.slice();
 
-            //console.log(fields[spot].player);
+            //console.log(fields);
 
-            console.log(this.state.selection);
+            //console.log(this.state.selection);
             //console.log("przed", fields[spot].style);
 
-            for(let i=0;i<fields.length;i++){fields[i].style = {...fields[i].style, backgroundColor: ""};}
+            
 
+            for(let i=0;i<fields.length;i++){fields[i].style = {...fields[i].style, backgroundColor: ""};}
             if (this.state.selection === -1) {
                 if (fields[spot]===Empty || fields[spot].player !== this.state.currPlayer) {
                     this.setState({
@@ -76,12 +77,13 @@ class Game extends React.Component {
                     });
                 } else {
                     fields[spot].style = {...fields[spot].style, backgroundColor: "#80d19b"};
-                    console.log("2", fields[spot].style);
+                    
                     this.setState({
                         feedback: "Wybierz gdzie chcesz przesunąć pionek",
                         selection: spot
                     })
                     this.showPosibleMoves(fields, spot);
+                    //console.log("2", fields[spot].style);
                 }
             } else if (this.state.selection > -1) {
                 fields[spot].style = {...fields[spot].style, backgroundColor: ""};
@@ -97,12 +99,12 @@ class Game extends React.Component {
                     const blueKnockedoutPieces = this.state.blueKnockedoutPieces.slice();
                     const destinationOccupied = fields[spot].player!==0 ? Boolean(fields[spot]) : false;
                     const movePosible = fields[this.state.selection].checkMove(this.state.selection, spot, destinationOccupied);
-                    const pathfind = fields[this.state.selection].pathfinding(this.state.selection, spot);
-                    const legalMove = this.legalMove(pathfind);
+                    
+                    const legalMove = this.legalMove(fields[this.state.selection].pathfinding(this.state.selection, spot));
 
                     //console.log(movePosible, legalMove);
 
-                    if (movePosible) {
+                    if (movePosible && legalMove) {
                         if (fields[spot] !== Empty) {
                             if (fields[spot].player === 1) {
                                 if (fields[spot] instanceof King) this.gameOver(1)
@@ -114,14 +116,22 @@ class Game extends React.Component {
                                 this.knocked.knockedB(fields[spot]);
                             }
                         }
+                        const currPlayerChecked = this.checkForPlayer(fields, this.state.currPlayer);
 
+                        if(currPlayerChecked){
+                            this.setState({
+                                feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe, Zostałeś zaszachowany",
+                                selection: -1
+                            })
+                        }
+                        //this.check(fields, spot);
                         
                         fields[this.state.selection].style = {...fields[this.state.selection].style, backgroundColor: ""};
-                        console.log("redFallenPieces", redKnockedoutPieces);
-                        console.log("blueFallenPieces", blueKnockedoutPieces);
+                        //console.log("redFallenPieces", redKnockedoutPieces);
+                        //console.log("blueFallenPieces", blueKnockedoutPieces);
 
                         fields[spot] = fields[this.state.selection];
-                        fields[this.state.selection] = Empty;
+                        fields[this.state.selection] = new Empty(0);
                         var player = this.state.currPlayer === 1 ? 2 : 1;
                         var turn = this.state.turn === 'red' ? 'black' : 'red';
                         this.setState({
@@ -151,24 +161,26 @@ class Game extends React.Component {
         }
     }
 
+    //////////////const canPieceKillPlayersKing = (piece, i) => piece.checkMove(playersKingPosition, i, fields)
+   
+
     showPosibleMoves(fields, sel){
         for(let spot=0;spot<fields.length;spot++){
-            const destinationOccupied = fields[spot].player!==0 ? true : false;
+            const destinationOccupied = fields[spot].player!==0 ? Boolean(fields[spot]) : false;
             const movePosible = fields[sel].checkMove(sel, spot, destinationOccupied);
-            const pathfind = fields[sel].pathfinding(sel, spot);
-            const legalMove = this.legalMove(pathfind);
-
-            console.log(movePosible, legalMove);
+            const legalMove = this.legalMove(fields[sel].pathfinding(sel, spot));
+            //console.log(movePosible, legalMove);
 
             if(movePosible && legalMove){
-                if(fields[spot].player!==this.state.currPlayer){
-                    fields[spot].style = {...fields[spot].style, backgroundColor: "#d1808f"};
+                if(fields[spot] instanceof Empty){
+                    fields[spot].style = {...fields[spot].style, backgroundColor: "#80d19b"};
+                }else if(fields[spot].player!==this.state.currPlayer){
+                    fields[spot].style = {...fields[spot].style, backgroundColor: "#c2372d"};
+                }else if(fields[spot]===fields[this.state.selection]){
+                    fields[spot].style = {...fields[spot].style, backgroundColor: ""};
                 }
-                
             }
         }
-
-        
     }
 
     gameOver(player) {
@@ -190,12 +202,14 @@ class Game extends React.Component {
     }
 
     legalMove(pathfind) {
+        //console.log("pafinding DATA: ", pathfind)
         var legal = true;
+        let bluforPlayer = this.state.currPlayer;
+        let opforPlayer = bluforPlayer === 1?2:1;
         for (let i = 0; i < pathfind.length; i++) {
-            if (this.state.fields[pathfind[i]] === null) {
-                if (this.state.fields[pathfind[i]].player === this.state.currPlayer) {
-                    legal = false;
-                }
+            if (this.state.fields[pathfind[i]].player === bluforPlayer || this.state.fields[pathfind[i]].player===opforPlayer) {
+                legal = false;
+                continue;
             }
         }
         return legal;
@@ -227,13 +241,13 @@ class Game extends React.Component {
         fields[58] = new Bishop(1, { backgroundImage: `url(${Rbishop})` });
         fields[61] = new Bishop(1, { backgroundImage: `url(${Rbishop})` });
 
-        fields[3] = new Queen(2, { backgroundImage: `url(${Bqueen})` });
-        fields[4] = new King(2, { backgroundImage: `url(${Bking})` });
+        fields[4] = new Queen(2, { backgroundImage: `url(${Bqueen})` });
+        fields[3] = new King(2, { backgroundImage: `url(${Bking})` });
         fields[59] = new Queen(1, { backgroundImage: `url(${Rqueen})` });
         fields[60] = new King(1, { backgroundImage: `url(${Rking})` });
 
         console.log(fields)
-        console.log(fields[8].style)
+        //console.log(fields[8].style)
 
         return fields;
     }

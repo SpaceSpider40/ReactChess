@@ -1,11 +1,11 @@
 import React from "react";
-import col from '../Dictionaries/col.json'
-import row from '../Dictionaries/row.json'
-import dialognalTLBR from '../Dictionaries/diagonalTLBR.json'
-import dialognalTRBL from '../Dictionaries/diagonalTRBL.json'
+const row = require("../Dictionaries/row.json");
+const col = require("../Dictionaries/col.json");
+const diagonalTLBR = require("../Dictionaries/diagonalTLBR.json");
+const diagonalTRBL = require("../Dictionaries/diagonalTRBL.json");
 
 const rowCheck = (currentLocation, destination) => {
-    return !!(row[currentLocation] &&  row[currentLocation][destination]);
+    return !!(row[currentLocation]&&row[currentLocation][destination]);
 }
 
 const colCheck = (currentLocation, destination) => {
@@ -13,10 +13,10 @@ const colCheck = (currentLocation, destination) => {
 }
 
 const diagonalCheck = (currentLocation, destination) => {
-    return !!((dialognalTLBR[currentLocation]&&dialognalTLBR[currentLocation][destination])||(dialognalTRBL[currentLocation]&&dialognalTRBL[currentLocation][destination]));
+    return !!((diagonalTLBR[currentLocation]&&diagonalTLBR[currentLocation][destination])||(diagonalTRBL[currentLocation]&&diagonalTRBL[currentLocation][destination]));
 }
 
-const cleanPath = (pathfinding, fields)=>pathfinding.reduce((acc,curr)=>!fields[curr]&&acc,true);
+export const cleanPath = (pathfinding, fields)=>pathfinding.reduce((acc,curr)=>!fields[curr]&&acc,true);
 
 export class King extends React.Component{
     constructor(player, style) {
@@ -64,10 +64,9 @@ export class Queen extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination, fields){
-
+    checkMove(currentLocation, destination,fields){
         return(         
-            cleanPath(this.pathfinding(currentLocation, destination),fields)&&(diagonalCheck(currentLocation,destination)||row(currentLocation, destination)||colCheck(currentLocation,destination))
+            cleanPath(this.pathfinding(currentLocation,destination),fields) && (diagonalCheck(currentLocation,destination)||rowCheck(currentLocation, destination)||colCheck(currentLocation,destination))
         );
     }
 
@@ -169,7 +168,7 @@ export class Knight extends React.Component{
 
     checkMove(currentLocation, destination){
         return(
-            (currentLocation - 17 === destination && !rowCheck(currentLocation,destination)) ||
+            (currentLocation - 17 === destination && !rowCheck(currentLocation,destination))||
             (currentLocation - 15 === destination && !rowCheck(currentLocation,destination))||
             (currentLocation - 10 === destination && !rowCheck(currentLocation,destination))||
             (currentLocation + 6 === destination && !rowCheck(currentLocation,destination))||
