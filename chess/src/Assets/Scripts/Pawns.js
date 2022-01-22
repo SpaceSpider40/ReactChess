@@ -64,9 +64,9 @@ export class Queen extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination,fields){
+    checkMove(currentLocation, destination){
         return(         
-            cleanPath(this.pathfinding(currentLocation,destination),fields) && (diagonalCheck(currentLocation,destination)||rowCheck(currentLocation, destination)||colCheck(currentLocation,destination))
+            (diagonalCheck(currentLocation,destination)||rowCheck(currentLocation, destination)||colCheck(currentLocation,destination))
         );
     }
 
@@ -119,8 +119,8 @@ export class Bishop extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination, fields){
-        return cleanPath(this.pathfinding(currentLocation, destination),fields)&&diagonalCheck(currentLocation,destination);
+    checkMove(currentLocation, destination){
+        return diagonalCheck(currentLocation,destination);
     }
 
     pathfinding(currentLocation, destination){
@@ -168,14 +168,14 @@ export class Knight extends React.Component{
 
     checkMove(currentLocation, destination){
         return(
-            (currentLocation - 17 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation - 15 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation - 10 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation + 6 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation + 15 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation - 6 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation + 10 === destination && !rowCheck(currentLocation,destination))||
-            (currentLocation + 17 === destination && !rowCheck(currentLocation,destination))
+            ((currentLocation - 17 === destination && !rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation - 15 === destination && !rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation - 10 === destination && rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation + 6 === destination && !rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation + 15 === destination && !rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation - 6 === destination && !rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation + 10 === destination && rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))||
+            ((currentLocation + 17 === destination && !rowCheck(currentLocation,destination))&& !colCheck(currentLocation,destination))
         )
     }
 
@@ -200,9 +200,9 @@ export class Tower extends React.Component{
         return this.player
     }
 
-    checkMove(currentLocation, destination,fields){
+    checkMove(currentLocation, destination){
         return(
-            cleanPath(this.pathfinding(currentLocation,destination),fields) && (colCheck(currentLocation, destination)||rowCheck(currentLocation,destination))
+           (colCheck(currentLocation, destination)||rowCheck(currentLocation,destination))
         );
     }
 
