@@ -39,6 +39,7 @@ class Timer extends React.Component {
         this.state.nums[this.state.num]=this.state.num;
     }
     endturn() {
+        
         clearInterval(this.timerID);
         this.state.times.push(this.state.seconds);
         this.setState({

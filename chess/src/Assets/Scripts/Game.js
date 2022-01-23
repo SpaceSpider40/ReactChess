@@ -45,7 +45,7 @@ class Game extends React.Component {
             threatSel: -1,
             checked: 0
         }
-
+        
         this.LEGACY_handleOnClick = this.LEGACY_handleOnClick.bind(this);
     }
 
@@ -56,12 +56,11 @@ class Game extends React.Component {
             gameState: "RUNNING",
             gameStyle: style.gameContainer
         })
-
         this.timer.start(this.state.currPlayer);
     }
 
     LEGACY_handleOnClick(spot) {
-
+      
         if (this.state.gameState === "RUNNING") {
             const fields = this.state.fields.slice();
 
@@ -81,7 +80,7 @@ class Game extends React.Component {
                         feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"
                     });
                 } else {
-                    fields[spot].style = { ...fields[spot].style, backgroundColor: "#80d19b" };
+                    fields[spot].style = { ...fields[spot].style, border: "solid 5px #80d19b" };
                     
                     this.setState({
                         feedback: "Wybierz gdzie chcesz przesunąć pionek",
@@ -140,6 +139,7 @@ class Game extends React.Component {
                             feedback: '',
                             turn: turn
                         })
+                 
                         this.timer.endturn();
                         this.timer.addNum();
                         this.updateThreatPosition(fields, spot);
@@ -209,9 +209,9 @@ class Game extends React.Component {
 
             if (movePosible && legalMove) {
                 if (fields[spot] instanceof Empty) {
-                    fields[spot].style = { ...fields[spot].style, backgroundColor: "#80d19b" };
+                    fields[spot].style = { ...fields[spot].style, border: "solid 5px #80d19b" };
                 } else if (fields[spot].player !== this.state.currPlayer) {
-                    fields[spot].style = { ...fields[spot].style, backgroundColor: "#c2372d" };
+                    fields[spot].style = { ...fields[spot].style, border: " solid 5px #c2372d" };
                     /*if(fields[spot] instanceof King){
                         this.setState({
                             
@@ -297,18 +297,23 @@ class Game extends React.Component {
     }
 
     render() {
-        var player = this.state.currPlayer === 1 ? this.state.player1 : this.state.player2
+        var dotplayer= this.state.currPlayer=== 1?"Czerwoni rozgrywają ture":" Niebiescy rozgrywają ture "
+            var player = this.state.currPlayer === 1 ? this.state.player1 : this.state.player2
+            var styledot = this.state.currPlayer === 1 ? style.dotr:style.dotb
         var playerStyle = this.state.currPlayer === 1 ? style.playerR : style.playerB
         return (<div className={this.state.gameStyle}>
             <div className={style.leftPanel}>
                 <p className={playerStyle}>Tura: {player}</p>
                 <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br />
+             
                 <p className={style.feedback}>{this.state.feedback}</p>
                 <KnockedoutBlock ref={instances => { this.knocked = instances }} />
                 <p className={this.state.winnerStyle}>{this.state.winner}</p>
+                
             </div>
+            <div className={styledot}>{dotplayer}</div>
             <BoardGenerator className={style.board} fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
-
+            
         </div>);
     }
 }
