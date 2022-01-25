@@ -291,7 +291,7 @@ class Game extends React.Component {
     }
 
     render() {
-        var dotplayer= this.state.currPlayer=== 1?"Czerwoni rozgrywają ture":" Niebiescy rozgrywają ture "
+        var dotplayer= this.state.currPlayer=== 1?"Czerwoni rozgrywają turę":" Niebiescy rozgrywają turę "
             var player = this.state.currPlayer === 1 ? this.state.player1 : this.state.player2
             var styledot = this.state.currPlayer === 1 ? style.dotr:style.dotb
         var playerStyle = this.state.currPlayer === 1 ? style.playerR : style.playerB
