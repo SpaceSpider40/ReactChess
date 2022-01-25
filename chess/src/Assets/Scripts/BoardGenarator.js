@@ -1,5 +1,6 @@
 import React from "react";
 import Field from "./Field";
+import style from "../Style/game.module.css"
 
 export default class Board extends React.Component {
     createField(spot, colour){
@@ -15,11 +16,11 @@ export default class Board extends React.Component {
                 const fieldColour = (isEven(i) && isEven(j)) || (!isEven(i) && !isEven(j))?"white":"black";
                 rows.push(this.createField((i*8)+j, fieldColour));
             }
-            board.push(<div className="Row">{rows}</div>);
+            board.push(<div className={style.row}>{rows}</div>);
         }
 
         return(
-            <div className="board">
+            <div className={style.board}>
                 {board}
             </div>
         );

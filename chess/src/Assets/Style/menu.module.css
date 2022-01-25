@@ -3,7 +3,7 @@
     height: 100%;
     width: 100%;
     text-align: center;
-    color: #0f395c;
+    color: #cccccc;
 }
 .menuContainerHidden{
     display: none;
@@ -15,37 +15,54 @@
 .buttonsContainer{
     font-size: 2rem;
 }
-.inputPlayerName{
+.inputPlayerNameB{
     margin: 2px;
     font-size: 2rem;
     background-color: transparent;
-    border: #008cff solid 2px;
+    border-bottom: royalblue solid 5px;
     width: 200px;
     transition: ease-in-out 1s;
-    color: #2288db;
+    color: #cccccc;
 }
-.inputPlayerName:hover{
+.inputPlayerNameB:hover{
     margin: 2px;
     font-size: 2rem;
     background-color: transparent;
-    border: #36a4ff solid 2px;
+    border-bottom: royalblue solid 5px;
     width: 300px;
-    color: #2288db;
+    color: #cccccc;
+}
+.inputPlayerNameR{
+    margin: 2px;
+    font-size: 2rem;
+    background-color: transparent;
+    border-bottom: crimson solid 5px;
+    width: 200px;
+    transition: ease-in-out 1s;
+    color: #cccccc;
+}
+.inputPlayerNameR:hover{
+    margin: 2px;
+    font-size: 2rem;
+    background-color: transparent;
+    border-bottom: crimson solid 5px;
+    width: 300px;
+    color: #cccccc;
 }
 .btnStart{
     margin: 20px;
     font-size: 2rem;
-    border: #008cff solid 2px;
+    border: none;
     letter-spacing: normal;
-    background-color: #98d0fd;
+    background-color: transparent;
     transition: ease-in-out 1s;
-    color: #0f395c;
+    color: #cccccc;
 }
 .btnStart:hover{
     margin: 20px;
-    font-size: 2rem;
+    font-size: 2.5rem;
     letter-spacing: 0.2rem;
-    border: #229cff solid 2px;
-    background-color: #a6d7ff;
-    color: #2288db;
+    border: none;
+    background-color: transparent;
+    color: #cccccc;
 }

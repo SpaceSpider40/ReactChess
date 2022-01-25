@@ -2,6 +2,7 @@ import React from "react";
 import BoardGenerator from "./BoardGenarator";
 import style from "../Style/game.module.css";
 import { Bishop } from "./Pawns";
+import { Empty } from "./Pawns";
 import { King } from "./Pawns";
 import { Queen } from "./Pawns";
 import { Knight } from "./Pawns";
@@ -39,9 +40,12 @@ class Game extends React.Component {
             gameState: "STOPED",
             winner: "",
             winnerStyle: style.winnerMSGHidden,
-            gameStyle: style.gameContainerHidden
+            gameStyle: style.gameContainerHidden,
+            threatSpot: -1,
+            threatSel: -1,
+            checked: 0
         }
-
+        
         this.LEGACY_handleOnClick = this.LEGACY_handleOnClick.bind(this);
     }
 
@@ -52,71 +56,78 @@ class Game extends React.Component {
             gameState: "RUNNING",
             gameStyle: style.gameContainer
         })
-
         this.timer.start(this.state.currPlayer);
     }
 
     LEGACY_handleOnClick(spot) {
-
+      
         if (this.state.gameState === "RUNNING") {
             const fields = this.state.fields.slice();
 
-            //console.log(fields[spot].player);
+            
+            for (let i = 0; i < fields.length; i++) {
+                if (fields[i].style !== { ...fields[i].style, border: "solid 5px red" }) {
+                    fields[i].style = { ...fields[i].style, border: "" };
+                }
+                fields[i].style = { ...fields[i].style, backgroundColor: "" };
+            }
 
-            console.log(this.state.selection);
-            //console.log("przed", fields[spot].style);
+            this.checkForPlayer(fields, this.state.currPlayer);
 
             if (this.state.selection === -1) {
-                if (!fields[spot] || fields[spot].player !== this.state.currPlayer) {
+                if (fields[spot] === Empty || fields[spot].player !== this.state.currPlayer) {
                     this.setState({
                         feedback: "Niepoprawny wybór. Wybierz pionki " + this.state.currPlayer + " gracza"
                     });
                 } else {
-                    //fields[spot].style = {...fields[spot].style, backgroundColor: "gray"};
-                    console.log("2", fields[spot].style);
+                    fields[spot].style = { ...fields[spot].style, border: "solid 5px #80d19b" };
+                    
                     this.setState({
                         feedback: "Wybierz gdzie chcesz przesunąć pionek",
                         selection: spot
                     })
+                    this.showPosibleMoves(fields, spot);
+                    this.updateThreatPosition(fields, spot);
+                    
                 }
             } else if (this.state.selection > -1) {
-                //fields[spot].style = {...fields[spot].style, backgroundColor: ""};
-                if (fields[spot] && fields[spot].player === this.state.currPlayer) {
+                
+                
+                fields[spot].style = { ...fields[spot].style, backgroundColor: "" };
+                if (fields[spot] !== Empty && fields[spot].player === this.state.currPlayer) {
                     this.setState({
                         feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
                         selection: -1
                     });
+                    fields[this.state.selection].style = { ...fields[this.state.selection].style, backgroundColor: "" };
                 } else {
                     const fields = this.state.fields.slice();
                     const redKnockedoutPieces = this.state.redKnockedoutPieces.slice();
                     const blueKnockedoutPieces = this.state.blueKnockedoutPieces.slice();
-                    const destinationOccupied = fields[spot] ? true : false;
+                    const destinationOccupied = fields[spot].player !== 0 ? Boolean(fields[spot]) : false;
                     const movePosible = fields[this.state.selection].checkMove(this.state.selection, spot, destinationOccupied);
-                    const pathfind = fields[this.state.selection].pathfinding(this.state.selection, spot);
-                    const legalMove = this.legalMove(pathfind);
 
-                    console.log(movePosible, legalMove);
+                    const legalMove = this.legalMove(fields[this.state.selection].pathfinding(this.state.selection, spot));
+                    
+                    
 
                     if (movePosible && legalMove) {
-                        if (fields[spot] !== null) {
+                        if (fields[spot] !== Empty) {
                             if (fields[spot].player === 1) {
-                                if (fields[spot] instanceof King) this.gameOver(1)
+                                if (fields[spot] instanceof King) this.gameOver(1);
                                 redKnockedoutPieces.push(fields[spot]);
                                 this.knocked.knockedR(fields[spot]);
-                            } else {
-                                if (fields[spot] instanceof King) this.gameOver(2)
+                            } else if (fields[spot].player === 2) {
+                                if (fields[spot] instanceof King) this.gameOver(2);
                                 blueKnockedoutPieces.push(fields[spot]);
                                 this.knocked.knockedB(fields[spot]);
                             }
                         }
 
-                        
-
-                        console.log("redFallenPieces", redKnockedoutPieces);
-                        console.log("blueFallenPieces", blueKnockedoutPieces);
+                        fields[this.state.selection].style = { ...fields[this.state.selection].style, backgroundColor: "" };
 
                         fields[spot] = fields[this.state.selection];
-                        fields[this.state.selection] = null;
+                        fields[this.state.selection] = new Empty(0);
                         var player = this.state.currPlayer === 1 ? 2 : 1;
                         var turn = this.state.turn === 'red' ? 'black' : 'red';
                         this.setState({
@@ -128,13 +139,16 @@ class Game extends React.Component {
                             feedback: '',
                             turn: turn
                         })
+                 
                         this.timer.endturn();
                         this.timer.addNum();
+                        this.updateThreatPosition(fields, spot);
                     } else {
                         this.setState({
                             feedback: "Niepoprawny wybór. Wybierz ponownie pionek i miejsce docelowe",
                             selection: -1
                         })
+                        fields[this.state.selection].style = { ...fields[this.state.selection].style, backgroundColor: "" };
                     }
                 }
             }
@@ -142,6 +156,74 @@ class Game extends React.Component {
             this.setState({
                 feedback: "Proszę podać graczy i nacisnąć przycisk start"
             })
+        }
+    }
+
+    checkForPlayer(fields, player) {
+        console.log(this.state.threatSpot, this.state.threatSel);
+        if (this.state.threatSpot > -1) {
+            if (fields[this.state.threatSpot] instanceof King) {
+                if (this.state.threatSpot !== this.state.threatSel) {
+                    
+                    if(fields[this.state.threatSel] instanceof Empty){this.setState({checked:0});}else{
+                        console.log("MY KING IN DANGER");
+                        fields[this.state.threatSpot].style = { ...fields[this.state.threatSpot].style, border: "solid 5px red" };
+                        this.setState({checked:1});
+                    }
+                        
+                    
+                }
+            }
+        }
+    }
+
+    updateThreatPosition(fields, sel) {
+        for (let spot = 0; spot < fields.length; spot++) {
+            const destinationOccupied = fields[spot].player !== 0 ? Boolean(fields[spot]) : false;
+            const movePosible = fields[sel].checkMove(sel, spot, destinationOccupied);
+            const legalMove = this.legalMove(fields[sel].pathfinding(sel, spot));
+
+            if (movePosible && legalMove) {
+                if (fields[spot] instanceof Empty) {
+                    //fields[spot].style = { ...fields[spot].style, backgroundColor: "#80d19b" };
+                } else if (fields[spot].player !== this.state.currPlayer) {
+                    //fields[spot].style = { ...fields[spot].style, backgroundColor: "#c2372d" };
+                    if(fields[spot] instanceof King){
+                        this.setState({
+                            
+                            threatSel: sel,
+                            threatSpot: spot
+                            
+                        })
+                    }
+                } 
+            }
+        }
+    }
+
+    showPosibleMoves(fields, sel) {
+        for (let spot = 0; spot < fields.length; spot++) {
+            const destinationOccupied = fields[spot].player !== 0 ? Boolean(fields[spot]) : false;
+            const movePosible = fields[sel].checkMove(sel, spot, destinationOccupied);
+            const legalMove = this.legalMove(fields[sel].pathfinding(sel, spot));
+
+            if (movePosible && legalMove) {
+                if (fields[spot] instanceof Empty) {
+                    fields[spot].style = { ...fields[spot].style, border: "solid 5px #80d19b" };
+                } else if (fields[spot].player !== this.state.currPlayer) {
+                    fields[spot].style = { ...fields[spot].style, border: " solid 5px #c2372d" };
+                    /*if(fields[spot] instanceof King){
+                        this.setState({
+                            
+                            threatSel: sel,
+                            threatSpot: spot
+                            
+                        })
+                    }*/
+                } else if (fields[spot] === fields[this.state.selection]) {
+                    fields[spot].style = { ...fields[spot].style, backgroundColor: "" };
+                }
+            }
         }
     }
 
@@ -160,98 +242,32 @@ class Game extends React.Component {
                 winnerStyle: style.winnerMSG
             })
         }
-        this.timer.stop()
+        //this.timer.stop()
     }
-
-    UNUSED_handleOnClick(spot) {
-        const fields = [...this.state.fields];
-
-        if (this.state.selection === -1) {
-            if (!fields[spot] || fields[spot].player !== this.state.currPlayer) {
-                this.setState({ feedback: "Wybierz pionki gracza numer " + this.state.currPlayer });
-                if (fields[spot]) {
-                    fields[spot].style = { ...fields[spot].style, backgroundColor: "" };
-                }
-            } else {
-                fields[spot].style = { ...fields[spot], backgroundColor: "gray" };
-                this.setState({
-                    feedback: "Wybierz miejsce docelowe dla pionka",
-                    selection: -1
-                })
-            } return;
-        }
-
-        fields[this.state.selection].style = { ...fields[this.state.selection].style, backgroundColor: "" };
-
-        if (fields[spot] && fields[spot].player === this.state.currPlayer) {
-            this.setState({
-                feedback: "Błędny wybór. Wybierz ponownie miejsce docelowe dla pionka",
-                selection: -1
-            })
-        } else {
-            const redKnockedoutPieces = [];
-            const blueKnockedoutPieces = [];
-            const occupiedByEnemy = Boolean(fields[spot]);
-            const checkMove = fields[this.state.selection].checkMove(this.state.selection, spot, occupiedByEnemy);
-
-            if (checkMove) {
-                if (fields[spot] !== null) {
-                    if (fields[spot].player === 1) redKnockedoutPieces.push(fields[spot]);
-                    else blueKnockedoutPieces.push(fields[spot]);
-                }
-                
-                fields[spot] = fields[this.state.selection];
-                fields[this.state.selection] = null;
-
-                const checked = this.CheckedPlayer(fields, this.state.currPlayer);
-
-                if (checked) {
-                    this.setState(oldState => ({
-                        feedback: "Błędny wybór. Wybierz ponownie miejsce docelowe dla pionka. Gracz " + this.state.currPlayer + " został zaszachowany",
-                        selection: -1,
-                    }))
-                } else {
-                    var player = this.state.currPlayer === 1 ? 2 : 1;
-                    var turn = this.state.turn === 'red' ? 'blue' : 'red'
-
-                    this.setState(oldState => ({
-                        selection: -1,
-                        fields,
-                        redKnockedoutPieces: [...oldState.redFallenPices, ...redKnockedoutPieces],
-                        blueKnockedoutPieces: [...oldState.blueFallenPices, ...blueKnockedoutPieces],
-                        currPlayer: player,
-                        feedback: '',
-                        turn
-                    }));
-                  
-                }
-
-            } else {
-                this.setState({
-                    feedback: "Błędny wybór. Wybierz ponownie miejsce docelowe dla pionka",
-                    selection: -1
-                })
-            }
-        }
-    }
-
 
     legalMove(pathfind) {
+        //console.log("pafinding DATA: ", pathfind)
         var legal = true;
+        let bluforPlayer = this.state.currPlayer;
+        let opforPlayer = bluforPlayer === 1 ? 2 : 1;
         for (let i = 0; i < pathfind.length; i++) {
-            if (this.state.fields[pathfind[i]] !== null) {
+            if (this.state.fields[pathfind[i]].player === bluforPlayer || this.state.fields[pathfind[i]].player === opforPlayer) {
                 legal = false;
+                continue;
             }
         }
         return legal;
     }
 
     initChessBoard() {
-        const fields = Array(64).fill(null);
+        const fields = Array(64);
 
         for (var i = 8; i < 16; i++) {
             fields[i] = new Pawn(2, { backgroundImage: `url(${Bpawn})` })
             fields[i + 40] = new Pawn(1, { backgroundImage: `url(${Rpawn})` })
+        }
+        for (let i = 16; i < 48; i++) {
+            fields[i] = new Empty(0);
         }
 
         fields[0] = new Tower(2, { backgroundImage: `url(${Btower})` });
@@ -269,32 +285,35 @@ class Game extends React.Component {
         fields[58] = new Bishop(1, { backgroundImage: `url(${Rbishop})` });
         fields[61] = new Bishop(1, { backgroundImage: `url(${Rbishop})` });
 
-        fields[3] = new Queen(2, { backgroundImage: `url(${Bqueen})` });
-        fields[4] = new King(2, { backgroundImage: `url(${Bking})` });
+        fields[4] = new Queen(2, { backgroundImage: `url(${Bqueen})` });
+        fields[3] = new King(2, { backgroundImage: `url(${Bking})` });
         fields[59] = new Queen(1, { backgroundImage: `url(${Rqueen})` });
         fields[60] = new King(1, { backgroundImage: `url(${Rking})` });
 
         console.log(fields)
-        console.log(fields[8].style)
+        //console.log(fields[8].style)
 
         return fields;
     }
 
     render() {
-        var player = this.state.currPlayer===1?this.state.player1:this.state.player2
-        var playerStyle = this.state.currPlayer===1?style.playerR:style.playerB
+        var dotplayer= this.state.currPlayer=== 1?"Czerwoni rozgrywają turę":" Niebiescy rozgrywają turę "
+            var player = this.state.currPlayer === 1 ? this.state.player1 : this.state.player2
+            var styledot = this.state.currPlayer === 1 ? style.dotr:style.dotb
+        var playerStyle = this.state.currPlayer === 1 ? style.playerR : style.playerB
         return (<div className={this.state.gameStyle}>
             <div className={style.leftPanel}>
                 <p className={playerStyle}>Tura: {player}</p>
                 <Timer player={this.state.currPlayer} ref={instance => { this.timer = instance; }} /><br />
+             
                 <p className={style.feedback}>{this.state.feedback}</p>
-                <KnockedoutBlock ref={instances=>{this.knocked = instances}}/>
+                <KnockedoutBlock ref={instances => { this.knocked = instances }} />
                 <p className={this.state.winnerStyle}>{this.state.winner}</p>
+                
             </div>
-            <div className={style.board}>
-                <BoardGenerator fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
-            </div>
-
+            <div className={styledot}>{dotplayer}</div>
+            <BoardGenerator className={style.board} fields={this.state.fields} onClick={(spot) => this.LEGACY_handleOnClick(spot)}></BoardGenerator>
+            
         </div>);
     }
 }

@@ -39,13 +39,14 @@ class Timer extends React.Component {
         this.state.nums[this.state.num]=this.state.num;
     }
     endturn() {
+        
         clearInterval(this.timerID);
         this.state.times.push(this.state.seconds);
         this.setState({
             seconds: 0
         })
         this.timerID = setInterval(() => this.tick(), 1000);
-        console.log(this.state.times);
+        //console.log(this.state.times);
     }
     //<button className={style.endturn} onClick={this.endturn}>Endturn</button>
     render() {;

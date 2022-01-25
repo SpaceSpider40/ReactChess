@@ -1,5 +1,5 @@
 .feedback{
-    color: red;
+    color: rgb(255,215,0,0.877);
     float: left;
     position: absolute;
     font-size: 1.7rem;
@@ -10,7 +10,7 @@
     margin: 0;
     position: absolute;
     font-size: 8rem;
-    color: black;
+    color: #cccccc;
     top: 25%;
     width: 99%;
     text-align: center;
@@ -39,18 +39,18 @@
     float: left;
     display: block;
     height: 90%;
-    width: 46.4%;
+    width: 40%;
     text-align: center;
 }
 .playerR{
-    color: #ad1111;
+    color: crimson;
     font-size: 3rem;
     margin: 2px;
     border-bottom: solid 2px;
     text-align: center;
 }
 .playerB{
-    color: rgb(24, 24, 167);
+    color:royalblue;
     font-size: 3rem;
     margin: 2px;
     text-align: center;
@@ -67,4 +67,44 @@
               transform: translateZ(0);
       opacity: 1;
     }
+}
+
+.board button{
+    width: 12.5%;
+    height:100%;
+    border: none;
+}
+.board{
+  border: solid 15px #2e2d2d;
+  height: 1025px;
+  width: 1025px;
+  margin: 2px;
+  float: right;
+}
+
+.row{
+    height: 12.5%;
+  }
+  .dotr{
+      border: crimson solid 2px;
+      padding: 10px;
+      border-radius: 10px;
+text-align: center;
+      float: left;
+    width: 6%;
+   height: 10%;
+   font-size: 20px;
+    color: rgb(255,215,0,0.877);
+
+  }
+  .dotb{
+    border: royalblue solid 2px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    float: left;
+    text-align: center;
+    width: 6%;
+    height: 10%;
+  color: rgb(255,215,0,0.877);
   }

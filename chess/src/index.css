@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 body {
+  color: #cccccc;
   margin: 0;
   height: 100%;
   font-family: 'Varela Round', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #85c8ff;
+  background-image: url("/src/Assets/Sprites/menu-graphic/background-menu2.png");
+background-size: 100%;
+
 }
 
 code {
@@ -17,16 +20,15 @@ code {
   width: 100%;
 }
 .black{
-  background-color: black;
+  background-color: rgba(0, 0, 0,0.8);
   width: 12.5%;
   height:100%;
   
 }
 .white{
-  background-color: white;
+  background-color: rgba(255,255,255,0.8);
   width: 12.5%;
   height: 100%;
-
 }
 .board{
   border: solid 30px #2e2d2d;
@@ -39,6 +41,7 @@ code {
   height: 12.5%;
 }
 button{
+  border: navajowhite;
   background-position:center;
   background-repeat:no-repeat;
 }

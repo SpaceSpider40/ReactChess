@@ -3,13 +3,13 @@
     margin: 0px;
 }
 .timer ul{
-    border: solid black 3px;
+    border: solid #cccccc 3px;
     margin: 1px;
     padding: 2px;
     list-style: none;
 }
 .timer ul li{
-    border-top: black 1px dashed;
+    border-top: #cccccc 1px dashed;
 }
 .timer h2{
     padding: 1px;
