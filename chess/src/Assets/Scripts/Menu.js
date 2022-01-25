@@ -37,7 +37,7 @@ class Menu extends React.Component{
                     Gracz 1: <input type="text" name="player1" value={this.state.player1} onChange={this.handleChange} className={style.inputPlayerNameR}/><br/>
                     Gracz 2: <input type="text" name="player2" value={this.state.player2} onChange={this.handleChange} className={style.inputPlayerNameB}/>
                 </div>
-                <button className={style.btnStart} onClick={()=>this.handleClick()}>Start Game</button>
+                <button className={style.btnStart} onClick={()=>this.handleClick()}>Rozpocznij Gre</button>
             </div>
         </div>;
 
