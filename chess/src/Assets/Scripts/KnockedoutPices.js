@@ -11,24 +11,19 @@ export default class KnockedoutBlock extends React.Component{
         }
     }
     createField(field, spot, colour){
-        //console.log("styl fielda: ", field.style)
 
         return <Field key={spot} keyVal={spot} piece={field} style={field.style}/>
     }
     
     knockedR(tab){
         this.state.redKnockedoutPieces.push(tab);
-        //console.log("Zbite czerwone: ", tab);
         
     }
     knockedB(tab){
         this.state.blueKnockedoutPieces.push(tab);
-        //console.log("Zbite niebieskie: ", tab);
     }
     
     render(){
-        //console.log("Zbite czerowne Local: ", this.state.redKnockedoutPieces);
-        //console.log("Zbite niebieskie Local: ", this.state.blueKnockedoutPieces);
         return( 
             <div className={style.container}>
                 <h1>Zbite</h1>

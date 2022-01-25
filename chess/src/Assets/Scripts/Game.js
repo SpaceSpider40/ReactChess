@@ -160,13 +160,11 @@ class Game extends React.Component {
     }
 
     checkForPlayer(fields, player) {
-        console.log(this.state.threatSpot, this.state.threatSel);
         if (this.state.threatSpot > -1) {
             if (fields[this.state.threatSpot] instanceof King) {
                 if (this.state.threatSpot !== this.state.threatSel) {
                     
                     if(fields[this.state.threatSel] instanceof Empty){this.setState({checked:0});}else{
-                        console.log("MY KING IN DANGER");
                         fields[this.state.threatSpot].style = { ...fields[this.state.threatSpot].style, border: "solid 5px red" };
                         this.setState({checked:1});
                     }
@@ -246,7 +244,6 @@ class Game extends React.Component {
     }
 
     legalMove(pathfind) {
-        //console.log("pafinding DATA: ", pathfind)
         var legal = true;
         let bluforPlayer = this.state.currPlayer;
         let opforPlayer = bluforPlayer === 1 ? 2 : 1;
@@ -289,9 +286,6 @@ class Game extends React.Component {
         fields[3] = new King(2, { backgroundImage: `url(${Bking})` });
         fields[59] = new Queen(1, { backgroundImage: `url(${Rqueen})` });
         fields[60] = new King(1, { backgroundImage: `url(${Rking})` });
-
-        console.log(fields)
-        //console.log(fields[8].style)
 
         return fields;
     }
